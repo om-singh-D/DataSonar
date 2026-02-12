@@ -87,8 +87,8 @@ docker-compose ps
 ## 📅 Development Roadmap
 
 - [x] Project setup & folder structure
-- [ ] Docker Compose infrastructure
-- [ ] Ingestion Service (Kafka)
+- [x] Docker Compose infrastructure
+- [x] Ingestion Service (Kafka)
 - [ ] Gateway Service (Auth + API)
 - [ ] Quality Engine (FastAPI)
 - [ ] Anomaly Detection (ML)
