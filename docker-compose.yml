@@ -1,0 +1,206 @@
+services:
+  # ============================================
+  # MESSAGE BROKERS
+  # ============================================
+  
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: datasonar-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      KAFKA_OPTS: "-Dzookeeper.4lw.commands.whitelist=ruok,srvr,stat"
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: echo ruok | nc localhost 2181 | grep imok
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: datasonar-kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: kafka-broker-api-versions --bootstrap-server localhost:9092
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: datasonar-kafka-ui
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: datasonar-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    networks:
+      - datasonar-network
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: datasonar-rabbitmq
+    ports:
+      - "5672:5672"    # AMQP
+      - "15672:15672"  # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: datasonar
+      RABBITMQ_DEFAULT_PASS: datasonar_secret
+      RABBITMQ_DEFAULT_VHOST: datasonar
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # DATABASES
+  # ============================================
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: datasonar-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: datasonar
+      POSTGRES_USER: datasonar
+      POSTGRES_PASSWORD: datasonar_secret
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: pg_isready -U datasonar -d datasonar
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7.0
+    container_name: datasonar-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: datasonar
+      MONGO_INITDB_ROOT_PASSWORD: datasonar_secret
+      MONGO_INITDB_DATABASE: datasonar
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: mongosh --eval "db.adminCommand('ping')" --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: datasonar-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass datasonar_secret
+    volumes:
+      - redis-data:/data
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: redis-cli -a datasonar_secret ping | grep PONG
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # OBJECT STORAGE
+  # ============================================
+
+  minio:
+    image: minio/minio:latest
+    container_name: datasonar-minio
+    ports:
+      - "9000:9000"    # API
+      - "9001:9001"    # Console
+    environment:
+      MINIO_ROOT_USER: datasonar
+      MINIO_ROOT_PASSWORD: datasonar_secret
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - datasonar-network
+    healthcheck:
+      test: mc ready local
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Create default buckets on startup
+  minio-setup:
+    image: minio/mc:latest
+    container_name: datasonar-minio-setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set datasonar http://minio:9000 datasonar datasonar_secret;
+      mc mb datasonar/data-samples --ignore-existing;
+      mc mb datasonar/reports --ignore-existing;
+      mc mb datasonar/ml-models --ignore-existing;
+      echo 'Buckets created successfully';
+      "
+    networks:
+      - datasonar-network
+
+# ============================================
+# VOLUMES
+# ============================================
+volumes:
+  zookeeper-data:
+  kafka-data:
+  rabbitmq-data:
+  postgres-data:
+  mongodb-data:
+  redis-data:
+  minio-data:
+
+# ============================================
+# NETWORK
+# ============================================
+networks:
+  datasonar-network:
+    driver: bridge
+    name: datasonar-network
