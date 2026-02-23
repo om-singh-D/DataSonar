@@ -13,3 +13,156 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// ============================================
+// USER MANAGEMENT
+// ============================================
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model User {
+  id            String        @id @default(uuid()) @db.Uuid
+  email         String        @unique @db.VarChar(255)
+  passwordHash  String        @map("password_hash") @db.VarChar(255)
+  firstName     String        @map("first_name") @db.VarChar(100)
+  lastName      String        @map("last_name") @db.VarChar(100)
+  role          Role          @default(VIEWER)
+  status        AccountStatus @default(ACTIVE)
+  lastLoginAt   DateTime?     @map("last_login_at")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  apiKeys       ApiKey[]
+  auditLogs     AuditLog[]
+  alertConfigs  AlertConfig[]
+
+  @@map("users")
+}
+
+// ============================================
+// API KEY MANAGEMENT
+// ============================================
+
+model ApiKey {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String    @db.VarChar(100)
+  keyHash     String    @unique @map("key_hash") @db.VarChar(255)
+  prefix      String    @db.VarChar(10)    // First 8 chars for identification
+  userId      String    @map("user_id") @db.Uuid
+  scopes      String[]  @default(["read"])  // read, write, admin
+  isActive    Boolean   @default(true) @map("is_active")
+  lastUsedAt  DateTime? @map("last_used_at")
+  expiresAt   DateTime? @map("expires_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("api_keys")
+}
+
+// ============================================
+// AUDIT LOG
+// ============================================
+
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  CREATE
+  UPDATE
+  DELETE
+  API_CALL
+}
+
+model AuditLog {
+  id          String      @id @default(uuid()) @db.Uuid
+  userId      String?     @map("user_id") @db.Uuid
+  action      AuditAction
+  resource    String      @db.VarChar(100)
+  resourceId  String?     @map("resource_id") @db.VarChar(255)
+  details     Json?
+  ipAddress   String?     @map("ip_address") @db.VarChar(45)
+  userAgent   String?     @map("user_agent") @db.VarChar(500)
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  // Relations
+  user        User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ============================================
+// ALERT CONFIGURATION
+// ============================================
+
+enum AlertChannel {
+  EMAIL
+  SLACK
+  WEBHOOK
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model AlertConfig {
+  id              String        @id @default(uuid()) @db.Uuid
+  userId          String        @map("user_id") @db.Uuid
+  name            String        @db.VarChar(100)
+  channel         AlertChannel
+  destination     String        @db.VarChar(500)   // email, webhook URL, slack channel
+  severityFilter  AlertSeverity[] @default([HIGH, CRITICAL])
+  sourceFilter    String[]      @default([])       // filter by source IDs
+  isActive        Boolean       @default(true) @map("is_active")
+  cooldownMinutes Int           @default(15) @map("cooldown_minutes")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("alert_configs")
+}
+
+// ============================================
+// PIPELINE REGISTRY
+// ============================================
+
+enum PipelineStatus {
+  ACTIVE
+  PAUSED
+  ERROR
+  UNKNOWN
+}
+
+model Pipeline {
+  id            String         @id @default(uuid()) @db.Uuid
+  name          String         @unique @db.VarChar(200)
+  description   String?        @db.Text
+  sourceType    String         @map("source_type") @db.VarChar(50)
+  sourceConfig  Json           @map("source_config")
+  status        PipelineStatus @default(UNKNOWN)
+  lastEventAt   DateTime?      @map("last_event_at")
+  eventCount    BigInt         @default(0) @map("event_count")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  @@map("pipelines")
+}
