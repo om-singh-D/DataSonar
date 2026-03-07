@@ -46,7 +46,7 @@ jobs:
   docker-build:
     name: 🐳 Docker Build
     runs-on: ubuntu-latest
-    needs: [ingestion-service]
+    needs: [ingestion-service, gateway-service]
 
     steps:
       - name: Checkout code
