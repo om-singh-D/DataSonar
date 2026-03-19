@@ -89,9 +89,9 @@ docker-compose ps
 - [x] Project setup & folder structure
 - [x] Docker Compose infrastructure
 - [x] Ingestion Service (Kafka)
-- [ ] Gateway Service (Auth + API)
-- [ ] Quality Engine (FastAPI)
-- [ ] Anomaly Detection (ML)
+- [x] Gateway Service (Auth + API)
+- [x] Quality Engine (FastAPI)
+- [x] Anomaly Detection (ML)
 - [ ] Alert Service (RabbitMQ)
 - [ ] Dashboard (Next.js)
 - [ ] Observability (Prometheus + ELK)
