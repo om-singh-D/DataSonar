@@ -24,8 +24,10 @@ async function seed() {
     for (let i = 0; i < 50; i++) {
         const pipeline = pipelines[i % pipelines.length];
         const timestamp = new Date(now - i * 3600000).toISOString(); // 1 hour intervals backwards
+        const eventId = crypto.randomUUID();
         scoreDocs.push({
-            eventId: crypto.randomUUID(),
+            event_id: eventId,
+            eventId,
             sourceId: pipeline,
             scores: {
                 completeness: 85 + Math.random() * 15,
