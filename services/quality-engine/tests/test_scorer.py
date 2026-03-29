@@ -4,7 +4,7 @@ from __future__ import annotations
 import pytest
 from datetime import datetime, timezone, timedelta
 
-from app.schemas.event import EnrichedEvent, EventData, ManualScoreRequest
+from app.schemas.event import ManualScoreRequest
 from app.services.quality_scorer import (
     _score_completeness,
     _score_accuracy,

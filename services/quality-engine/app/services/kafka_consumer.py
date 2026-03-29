@@ -96,6 +96,10 @@ class KafkaConsumerService:
 
     async def _consume_loop(self) -> None:
         """Main consumption loop — scores each message."""
+        if self._consumer is None:
+            logger.error("Kafka consumer not initialized")
+            return
+
         async for msg in self._consumer:
             if not self._running:
                 break

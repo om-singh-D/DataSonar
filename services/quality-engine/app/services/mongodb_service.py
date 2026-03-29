@@ -4,7 +4,6 @@ Stores and queries QualityReport documents.
 """
 from __future__ import annotations
 
-from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
@@ -12,7 +11,7 @@ from pymongo import DESCENDING
 
 from app.core.config import get_settings
 from app.core.logger import get_logger
-from app.schemas.event import QualityReport, QualityScoreSummary
+from app.schemas.event import QualityReport
 
 logger = get_logger(__name__)
 _settings = get_settings()
