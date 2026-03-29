@@ -88,11 +88,11 @@
 </head>
 <body class="font-body text-on-surface antialiased selection:bg-primary/30">
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-[#0e0e10] border-r border-[#48474a]/15 z-50 font-inter antialiased text-sm tracking-tight">
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-surface border-r border-outline-variant/15 z-50 font-inter antialiased text-sm tracking-tight">
 <div class="flex flex-col h-full p-4 gap-2">
 <!-- Header -->
 <div class="flex items-center gap-3 px-2 mb-8 mt-2">
-<div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-primary-dim flex items-center justify-center shadow-lg shadow-primary/20">
+<div class="w-8 h-8 rounded bg-linear-to-br from-primary to-primary-dim flex items-center justify-center shadow-lg shadow-primary/20">
 <span class="material-symbols-outlined text-on-primary text-xl" data-icon="account_tree">account_tree</span>
 </div>
 <div class="flex flex-col">
@@ -102,30 +102,30 @@
 </div>
 <!-- Main Navigation -->
 <nav class="flex-1 flex flex-col gap-1">
-<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200 active:scale-[0.98]" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
 <span>Overview</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-[#85adff] bg-[#19191c] font-semibold rounded-md active:scale-[0.98] transition-all" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-primary bg-surface-container font-semibold rounded-md active:scale-[0.98] transition-all" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="account_tree">account_tree</span>
 <span>Pipelines</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200 active:scale-[0.98]" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="notifications_active">notifications_active</span>
 <span>Alerts</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200 active:scale-[0.98]" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
 <span>Settings</span>
 </a>
 </nav>
 <!-- Footer Navigation -->
 <div class="mt-auto flex flex-col gap-1 pt-4 border-t border-outline-variant/10">
-<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="account_circle">account_circle</span>
 <span>Profile</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-200" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
 <span>Logout</span>
 </a>
@@ -133,27 +133,27 @@
 </div>
 </aside>
 <!-- TopAppBar -->
-<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-[#131315]/70 backdrop-blur-xl border-b border-[#48474a]/15 flex justify-between items-center px-8 font-inter text-sm font-medium">
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-surface-container-low/70 backdrop-blur-xl border-b border-outline-variant/15 flex justify-between items-center px-8 font-inter text-sm font-medium">
 <div class="flex items-center gap-6">
 <div class="relative group">
 <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-lg" data-icon="search">search</span>
 <input class="bg-surface-container-lowest text-on-surface border-none rounded-lg pl-10 pr-4 py-1.5 w-64 focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/50" placeholder="Global search..." type="text"/>
 </div>
 <nav class="flex items-center gap-6">
-<a class="text-[#85adff] border-b-2 border-[#85adff] pb-1" href="#">Prod-Cluster-01</a>
-<a class="text-[#adaaad] hover:text-[#f9f5f8] transition-opacity" href="#">Staging</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Prod-Cluster-01</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-opacity" href="#">Staging</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
 <div class="flex items-center gap-2 mr-4 border-r border-outline-variant/20 pr-4">
-<button class="w-8 h-8 flex items-center justify-center text-[#adaaad] hover:text-[#f9f5f8] transition-opacity">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-opacity">
 <span class="material-symbols-outlined" data-icon="sensors">sensors</span>
 </button>
-<button class="w-8 h-8 flex items-center justify-center text-[#adaaad] hover:text-[#f9f5f8] transition-opacity relative">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-opacity relative">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 <span class="absolute top-2 right-2 w-1.5 h-1.5 bg-error rounded-full"></span>
 </button>
-<button class="w-8 h-8 flex items-center justify-center text-[#adaaad] hover:text-[#f9f5f8] transition-opacity">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-opacity">
 <span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
 </button>
 </div>
@@ -187,7 +187,7 @@
 <option>Development</option>
 </select>
 </div>
-<button class="bg-gradient-to-br from-primary to-primary-dim text-on-primary font-bold px-4 py-2.5 rounded-md text-sm flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/10">
+<button class="bg-linear-to-br from-primary to-primary-dim text-on-primary font-bold px-4 py-2.5 rounded-md text-sm flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/10">
 <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
             Add Pipeline
           </button>
