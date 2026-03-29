@@ -40,7 +40,7 @@ export default function OverviewPage() {
           </div>
           <button 
             onClick={() => refetch()}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-primary to-primary-dim text-on-primary font-semibold rounded-md shadow-lg shadow-primary/10 hover:opacity-90 transition-all active:scale-95 border-0 cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 bg-linear-to-br from-primary to-primary-dim text-on-primary font-semibold rounded-md shadow-lg shadow-primary/10 hover:opacity-90 transition-all active:scale-95 border-0 cursor-pointer"
           >
             <span className="material-symbols-outlined text-sm">refresh</span>
             <span>Refresh</span>
@@ -51,7 +51,7 @@ export default function OverviewPage() {
       {/* Metrics Grid: StatCards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-surface-container p-5 rounded-xl border-l-2 border-primary-dim relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="flex justify-between items-start mb-3">
             <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Total Events</span>
             <span className="material-symbols-outlined text-primary text-xl">database</span>
