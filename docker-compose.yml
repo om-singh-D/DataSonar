@@ -264,6 +264,37 @@ services:
     networks:
       - datasonar-network
 
+  dashboard-api:
+    build:
+      context: ./services/dashboard-api
+      dockerfile: Dockerfile
+    container_name: datasonar-dashboard-api
+    ports:
+      - "4001:4001"
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      DASHBOARD_API_PORT: 4001
+      DASHBOARD_WS_PORT: 4000
+      DATABASE_URL: postgresql://datasonar:datasonar_secret@postgres:5432/datasonar
+      MONGODB_URI: mongodb://datasonar:datasonar_secret@mongodb:27017/datasonar?authSource=admin
+      MONGODB_DB_NAME: datasonar
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: datasonar_secret
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - datasonar-network
+
+
 # ============================================
 # VOLUMES
 # ============================================
