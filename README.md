@@ -92,8 +92,8 @@ docker-compose ps
 - [x] Gateway Service (Auth + API)
 - [x] Quality Engine (FastAPI)
 - [x] Anomaly Detection (ML)
-- [ ] Alert Service (RabbitMQ)
-- [ ] Dashboard (Next.js)
+- [x] Alert Service (RabbitMQ)
+- [x] Dashboard (Next.js)
 - [ ] Observability (Prometheus + ELK)
 - [ ] Kubernetes deployment
 
