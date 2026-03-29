@@ -1,34 +1,62 @@
 import { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { useQueryClient } from '@tanstack/react-query';
 
 export interface AnomalyEvent {
   id: string;
-  pipelineId: string;
+  sourceId: string;
   message: string;
-  timestamp: string;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  timestamp?: string;
+  detectedAt?: string;
+  severity: number | string;
+  anomalyType: string;
 }
 
 export function useRealtimeAlerts() {
   const [alerts, setAlerts] = useState<AnomalyEvent[]>([]);
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'http://localhost:3000';
-    const newSocket = io(wsUrl, {
-      transports: ['websocket'],
-    });
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:4000';
+    let ws: WebSocket;
 
-    setSocket(newSocket);
+    try {
+      ws = new WebSocket(wsUrl);
 
-    newSocket.on('ANOMALY_DETECTED', (anomaly: AnomalyEvent) => {
-      setAlerts((prev) => [anomaly, ...prev].slice(0, 100)); // Keep last 100 alerts
-      // TODO: Show toast notification here
-      console.log('Anomaly received:', anomaly);
-    });
+      ws.onopen = () => {
+        console.log('Connected to DataSonar real-time feed');
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'new-anomaly' || data.type === 'new-alert' || data.type === 'quality-update') {
+            setAlerts((prev) => [data.payload, ...prev].slice(0, 50));
+
+            if (data.type === 'new-alert' || data.type === 'alert-updated') {
+              queryClient.invalidateQueries({ queryKey: ['alerts'] });
+            }
+            if (data.type === 'new-anomaly' || data.type === 'quality-update') {
+              queryClient.invalidateQueries({ queryKey: ['overview'] });
+              queryClient.invalidateQueries({ queryKey: ['pipelines'] });
+            }
+          }
+        } catch (e) {
+          console.error('Failed to parse WS message', e);
+        }
+      };
+
+      ws.onclose = () => {
+        console.log('WS connection closed.');
+      };
+
+      setSocket(ws);
+    } catch (err) {
+      console.error('Failed to connect to WS', err);
+    }
 
     return () => {
-      newSocket.disconnect();
+      if (ws) ws.close();
     };
   }, []);
 
