@@ -69,7 +69,7 @@ export default function PipelinesPage() {
             <span>Refresh</span>
           </button>
           <button 
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-br from-primary to-primary-dim text-on-primary font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 border-0 cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2.5 bg-linear-to-br from-primary to-primary-dim text-on-primary font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 border-0 cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>
             <span>New Pipeline</span>
@@ -184,7 +184,7 @@ export default function PipelinesPage() {
             <button
               onClick={() => setPage((current) => Math.max(current - 1, 1))}
               disabled={safePage <= 1}
-              className="flex items-center justify-center w-8 h-8 rounded-md bg-surface-container border border-outline-variant/20 text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer bg-transparent disabled:opacity-50"
+              className="flex items-center justify-center w-8 h-8 rounded-md bg-surface-container border border-outline-variant/20 text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[18px]">chevron_left</span>
             </button>
@@ -194,7 +194,7 @@ export default function PipelinesPage() {
             <button
               onClick={() => setPage((current) => Math.min(current + 1, totalPages))}
               disabled={safePage >= totalPages}
-              className="flex items-center justify-center w-8 h-8 rounded-md bg-surface-container border border-outline-variant/20 text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer bg-transparent disabled:opacity-50"
+              className="flex items-center justify-center w-8 h-8 rounded-md bg-surface-container border border-outline-variant/20 text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[18px]">chevron_right</span>
             </button>
