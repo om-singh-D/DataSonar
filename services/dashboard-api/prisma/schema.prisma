@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PipelineStatus {
+  ACTIVE
+  PAUSED
+  ERROR
+  UNKNOWN
+}
+
+model Pipeline {
+  id            String         @id @default(uuid()) @db.Uuid
+  name          String         @unique @db.VarChar(200)
+  description   String?        @db.Text
+  sourceType    String         @map("source_type") @db.VarChar(50)
+  sourceConfig  Json           @map("source_config")
+  status        PipelineStatus @default(UNKNOWN)
+  lastEventAt   DateTime?      @map("last_event_at")
+  eventCount    BigInt         @default(0) @map("event_count")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  @@map("pipelines")
+}
