@@ -187,6 +187,50 @@ services:
     networks:
       - datasonar-network
 
+  # ============================================
+  # APPLICATION SERVICES
+  # ============================================
+
+  anomaly-detector:
+    build:
+      context: ./services/anomaly-detector
+      dockerfile: Dockerfile
+    container_name: datasonar-anomaly-detector
+    profiles:
+      - anomaly
+    ports:
+      - "8002:8002"
+    environment:
+      SERVICE_NAME: datasonar-anomaly-detector
+      SERVICE_PORT: 8002
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_CONSUMER_GROUP: anomaly-detector-group
+      KAFKA_TOPIC_QUALITY_SCORED: datasonar.quality-scores
+      RABBITMQ_URL: amqp://datasonar:datasonar_secret@rabbitmq:5672/datasonar
+      RABBITMQ_EXCHANGE: alerts.exchange
+      RABBITMQ_ROUTING_KEY: alert.anomaly.detected
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: datasonar
+      MINIO_SECRET_KEY: datasonar_secret
+      MINIO_SECURE: "false"
+      MINIO_BUCKET_MODELS: ml-models
+      MONGODB_URI: mongodb://datasonar:datasonar_secret@mongodb:27017/datasonar?authSource=admin
+      MONGODB_DB_NAME: datasonar
+    depends_on:
+      kafka:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-setup:
+        condition: service_completed_successfully
+      mongodb:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - datasonar-network
+
 # ============================================
 # VOLUMES
 # ============================================

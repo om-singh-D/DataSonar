@@ -1,0 +1,35 @@
+[project]
+name = "datasonar-anomaly-detector"
+version = "0.1.0"
+description = "DataSonar anomaly detection service"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.115.6",
+    "uvicorn[standard]==0.34.0",
+    "aiokafka==0.12.0",
+    "aio-pika==9.5.4",
+    "scikit-learn==1.6.1",
+    "prophet==1.1.6",
+    "pandas==2.2.3",
+    "numpy==2.2.1",
+    "motor==3.7.0",
+    "minio==7.2.12",
+    "pydantic==2.10.4",
+    "pydantic-settings==2.7.1",
+    "python-dotenv==1.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "pytest-asyncio==0.25.0",
+    "pytest-mock==3.14.0",
+    "pytest-cov==6.0.0",
+    "ruff==0.8.6",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
