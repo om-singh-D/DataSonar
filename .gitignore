@@ -43,6 +43,7 @@ htmlcov/
 
 # Prisma
 services/gateway/prisma/*.db
+services/dashboard-api/src/generated/
 
 # ML Models (large files)
 *.pkl
