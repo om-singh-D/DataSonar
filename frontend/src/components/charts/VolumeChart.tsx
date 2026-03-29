@@ -30,10 +30,10 @@ export function VolumeChart({ data }: VolumeChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <ComposedChart data={chartData} margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
+        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(72, 71, 74, 0.15)" />
         <XAxis
           dataKey="timestamp"
-          stroke="hsl(var(--muted-foreground))"
+          stroke="#adaaad"
           fontSize={12}
           tickLine={false}
           axisLine={false}
@@ -46,14 +46,14 @@ export function VolumeChart({ data }: VolumeChartProps) {
           }}
         />
         <YAxis
-          stroke="hsl(var(--muted-foreground))"
+          stroke="#adaaad"
           fontSize={12}
           tickLine={false}
           axisLine={false}
           tickFormatter={(val) => `${val}`}
         />
         <Tooltip
-          contentStyle={{ backgroundColor: 'hsl(var(--background))', borderColor: 'hsl(var(--border))', borderRadius: '8px' }}
+          contentStyle={{ backgroundColor: '#131315', borderColor: 'rgba(72, 71, 74, 0.15)', borderRadius: '8px', color: '#f9f5f8' }}
           labelFormatter={(val) => {
              try {
                 return new Date(val).toLocaleString()
@@ -65,12 +65,12 @@ export function VolumeChart({ data }: VolumeChartProps) {
         <Line
           type="monotone"
           dataKey="volume"
-          stroke="hsl(var(--primary))"
+          stroke="#85adff"
           strokeWidth={2}
           dot={false}
           activeDot={{ r: 6 }}
         />
-        <Scatter dataKey="anomalyVolume" fill="hsl(var(--destructive))" />
+        <Scatter dataKey="anomalyVolume" fill="#ff716c" />
       </ComposedChart>
     </ResponsiveContainer>
   );

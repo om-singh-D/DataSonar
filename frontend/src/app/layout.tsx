@@ -19,16 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} min-h-screen bg-background antialiased text-foreground`}>
+      <body className={`${inter.className} bg-[#0e0e10] text-[#f9f5f8] antialiased selection:bg-primary/30`}>
         <QueryProvider>
-          <div className="flex h-screen overflow-hidden">
+          <div className="min-h-screen font-body">
             <Sidebar />
-            <div className="flex flex-col flex-1 min-w-0">
-              <Header />
-              <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 bg-muted/20">
-                {children}
-              </main>
-            </div>
+            <Header />
+            <main className="ml-64 pt-16 min-h-screen bg-surface">
+              {children}
+            </main>
           </div>
         </QueryProvider>
       </body>

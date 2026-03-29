@@ -24,18 +24,18 @@ export function QualityRadar({ data }: QualityRadarProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
-        <PolarGrid stroke="hsl(var(--border))" />
-        <PolarAngleAxis dataKey="dimension" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} />
+        <PolarGrid stroke="rgba(72, 71, 74, 0.15)" />
+        <PolarAngleAxis dataKey="dimension" tick={{ fill: '#adaaad', fontSize: 12 }} />
         <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
         <Radar
           name="Quality Score"
           dataKey="score"
-          stroke="hsl(var(--primary))"
-          fill="hsl(var(--primary))"
+          stroke="#85adff"
+          fill="#85adff"
           fillOpacity={0.5}
         />
         <Tooltip
-          contentStyle={{ backgroundColor: 'hsl(var(--background))', borderColor: 'hsl(var(--border))', borderRadius: '8px' }}
+          contentStyle={{ backgroundColor: '#131315', borderColor: 'rgba(72, 71, 74, 0.15)', borderRadius: '8px', color: '#f9f5f8' }}
         />
       </RadarChart>
     </ResponsiveContainer>
