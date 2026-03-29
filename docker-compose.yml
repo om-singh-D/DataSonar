@@ -114,7 +114,7 @@ services:
     image: mongo:7.0
     container_name: datasonar-mongodb
     ports:
-      - "27017:27017"
+      - "27018:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: datasonar
       MONGO_INITDB_ROOT_PASSWORD: datasonar_secret
