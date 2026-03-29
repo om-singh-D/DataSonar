@@ -22,6 +22,16 @@ async function startMongoBridge(broadcast: Broadcaster): Promise<void> {
         broadcast('alert-updated', change.fullDocument);
       }
     });
+    stream.on('error', (error: any) => {
+      logger.warn('MongoDB change stream disabled for collection', {
+        collection: collectionName,
+        eventType,
+        error: error?.message || String(error),
+      });
+      void stream.close().catch(() => {
+        // no-op
+      });
+    });
     streams.push(stream);
   };
 
