@@ -231,6 +231,39 @@ services:
     networks:
       - datasonar-network
 
+  alert-service:
+    build:
+      context: ./services/alert-service
+      dockerfile: Dockerfile
+    container_name: datasonar-alert-service
+    profiles:
+      - alert
+    ports:
+      - "8003:8003"
+    environment:
+      SERVICE_NAME: datasonar-alert-service
+      SERVICE_PORT: 8003
+      RABBITMQ_URL: amqp://datasonar:datasonar_secret@rabbitmq:5672/datasonar
+      RABBITMQ_EXCHANGE: alerts.exchange
+      RABBITMQ_ROUTING_KEY: alert.anomaly.detected
+      RABBITMQ_QUEUE_ALERTS: alerts.anomaly.queue
+      RABBITMQ_DLQ: alerts.anomaly.dlq
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: datasonar_secret
+      DEDUP_TTL_SECONDS: 900
+      SLACK_WEBHOOK_URL: ""
+      SMTP_CONN_STRING: ""
+      WEBHOOK_URL: ""
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - datasonar-network
+
 # ============================================
 # VOLUMES
 # ============================================
