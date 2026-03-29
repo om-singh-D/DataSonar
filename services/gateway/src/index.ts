@@ -10,6 +10,7 @@ import { logger } from './utils/logger';
 import { swaggerSpec } from './config/swagger';
 import authRoutes from './routes/auth.routes';
 import pipelineRoutes from './routes/pipeline.routes';
+import alertConfigRoutes from './routes/alertconfig.routes';
 
 async function main(): Promise<void> {
   const app = express();
@@ -81,6 +82,7 @@ async function main(): Promise<void> {
   // API Routes
   app.use('/api/v1/auth', authRoutes);
   app.use('/api/v1/pipelines', pipelineRoutes);
+  app.use('/api/v1/alert-configs', alertConfigRoutes);
 
   // ============================================
   // ERROR HANDLING

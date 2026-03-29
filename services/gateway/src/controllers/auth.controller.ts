@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { AuthService, AppError } from '../services/auth.service';
 import { logger } from '../utils/logger';
+import jwt from 'jsonwebtoken';
+import { config } from '../config';
 
 const authService = new AuthService();
 
@@ -127,6 +129,44 @@ export class AuthController {
         status: 'error',
         message: 'Failed to update profile',
       });
+    }
+  }
+
+  /**
+   * POST /api/v1/auth/refresh
+   * Exchange a refresh token for a new access token.
+   */
+  async refresh(req: Request, res: Response): Promise<void> {
+    try {
+      const { refreshToken } = req.body;
+
+      if (!refreshToken) {
+        res.status(400).json({ status: 'error', message: 'Refresh token is required' });
+        return;
+      }
+
+      const payload = jwt.verify(refreshToken, config.jwt.secret) as { userId: string; type: string };
+
+      if (payload.type !== 'refresh') {
+        res.status(401).json({ status: 'error', message: 'Invalid token type' });
+        return;
+      }
+
+      const user = await authService.getProfile(payload.userId);
+      const tokens = authService.generateTokens(user as any);
+
+      res.status(200).json({
+        status: 'success',
+        message: 'Token refreshed successfully',
+        data: { tokens },
+      });
+    } catch (error) {
+      if (error instanceof AppError) {
+        res.status(error.statusCode).json({ status: 'error', message: error.message });
+        return;
+      }
+      logger.error('Token refresh failed', { error });
+      res.status(401).json({ status: 'error', message: 'Invalid or expired refresh token' });
     }
   }
 

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from '../controllers/auth.controller';
+import { ApiKeyController } from '../controllers/apikey.controller';
 import { authenticate } from '../middleware/auth.middleware';
 import { validate } from '../middleware/validate.middleware';
 import {
@@ -10,15 +11,22 @@ import {
 } from '../schemas/auth.schema';
 
 const router = Router();
-const controller = new AuthController();
+const authController = new AuthController();
+const apiKeyController = new ApiKeyController();
 
 // Public routes
-router.post('/register', validate(RegisterSchema), controller.register);
-router.post('/login', validate(LoginSchema), controller.login);
+router.post('/register', validate(RegisterSchema), authController.register);
+router.post('/login', validate(LoginSchema), authController.login);
+router.post('/refresh', authController.refresh);
 
-// Protected routes
-router.get('/profile', authenticate, controller.getProfile);
-router.patch('/profile', authenticate, validate(UpdateProfileSchema), controller.updateProfile);
-router.post('/change-password', authenticate, validate(ChangePasswordSchema), controller.changePassword);
+// Protected auth routes
+router.get('/profile', authenticate, authController.getProfile);
+router.patch('/profile', authenticate, validate(UpdateProfileSchema), authController.updateProfile);
+router.post('/change-password', authenticate, validate(ChangePasswordSchema), authController.changePassword);
+
+// API key management
+router.post('/api-keys', authenticate, apiKeyController.create);
+router.get('/api-keys', authenticate, apiKeyController.list);
+router.delete('/api-keys/:id', authenticate, apiKeyController.revoke);
 
 export default router;
