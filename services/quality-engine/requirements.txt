@@ -1,0 +1,26 @@
+# Web Framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# Kafka
+aiokafka==0.12.0
+
+# MongoDB
+motor==3.7.0
+pymongo==4.10.1
+
+# Data Processing
+pandas==2.2.3
+numpy==2.2.1
+
+# Validation
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# Utilities
+python-dotenv==1.0.1
+structlog==24.4.0
+httpx==0.28.1
+
+# Date/Time
+python-dateutil==2.9.0
