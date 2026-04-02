@@ -17,8 +17,13 @@ export function useRealtimeAlerts() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:4000';
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
     let ws: WebSocket;
+
+    if (!wsUrl) {
+      console.warn('NEXT_PUBLIC_WS_URL is not set. Realtime alerts are disabled.');
+      return;
+    }
 
     try {
       ws = new WebSocket(wsUrl);

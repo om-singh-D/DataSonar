@@ -67,7 +67,7 @@ export interface PipelineDetail {
     memory: string;
     backlog: number;
     uptime: string;
-  };
+  } | null;
 }
 
 export interface AlertItem {

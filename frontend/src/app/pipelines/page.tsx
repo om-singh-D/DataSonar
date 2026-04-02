@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePipelines } from '@/hooks/useDashboardData';
 
@@ -9,6 +9,17 @@ export default function PipelinesPage() {
   const [filterEnv, setFilterEnv] = useState('All');
   const [page, setPage] = useState(1);
   const pageSize = 10;
+
+  const sourceTypeOptions = useMemo(() => {
+    const values = new Set((pipelines || []).map((p) => p.sourceType).filter(Boolean));
+    return ['All', ...Array.from(values).sort((a, b) => a.localeCompare(b))];
+  }, [pipelines]);
+
+  useEffect(() => {
+    if (!sourceTypeOptions.includes(filterEnv)) {
+      setFilterEnv('All');
+    }
+  }, [filterEnv, sourceTypeOptions]);
 
   const filteredPipelines = pipelines?.filter((p) => {
     if (filterEnv === 'All') return true;
@@ -54,11 +65,11 @@ export default function PipelinesPage() {
               value={filterEnv}
               onChange={(e) => setFilterEnv(e.target.value)}
             >
-              <option value="All">All Environments</option>
-              <option value="PostgreSQL">PostgreSQL</option>
-              <option value="Kafka">Kafka</option>
-              <option value="S3">S3</option>
-              <option value="API">API</option>
+              {sourceTypeOptions.map((sourceType) => (
+                <option key={sourceType} value={sourceType}>
+                  {sourceType === 'All' ? 'All Source Types' : sourceType}
+                </option>
+              ))}
             </select>
           </div>
           <button

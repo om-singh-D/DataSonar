@@ -52,13 +52,13 @@ export default function PipelineDetailsPage() {
       </div>
 
       {/* Main Header Card */}
-      <div className="bg-gradient-to-br from-surface-container-low to-surface-container border border-outline-variant/10 rounded-2xl p-8 mb-8 shadow-xl relative overflow-hidden">
+      <div className="bg-linear-to-br from-surface-container-low to-surface-container border border-outline-variant/10 rounded-2xl p-8 mb-8 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
         
         <div className="flex justify-between items-start flex-wrap gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-4xl font-black tracking-tight text-on-surface bg-clip-text text-transparent bg-gradient-to-r from-on-surface to-on-surface-variant">
+              <h2 className="text-4xl font-black tracking-tight bg-clip-text text-transparent bg-linear-to-r from-on-surface to-on-surface-variant">
                 {pipeline.name}
               </h2>
               <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border max-w-max uppercase tracking-wider
@@ -75,7 +75,8 @@ export default function PipelineDetailsPage() {
                 {pipeline.sourceType}
               </div>
               <div className="flex items-center gap-2 text-sm text-on-surface-variant bg-surface-container-highest px-3 py-1 bg-opacity-30 rounded-full font-medium">
-                <span className="w-2 h-2 rounded-full bg-secondary"></span> Live Stream
+                <span className={`w-2 h-2 rounded-full ${pipeline.status === 'ACTIVE' ? 'bg-secondary' : 'bg-outline-variant'}`}></span>
+                {pipeline.status}
               </div>
             </div>
           </div>
@@ -85,7 +86,7 @@ export default function PipelineDetailsPage() {
               <span className="material-symbols-outlined text-[18px]">settings</span>
               Config
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-primary to-primary-dim text-on-primary font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 border-0 text-sm cursor-pointer whitespace-nowrap w-24">
+            <button className="flex items-center gap-2 px-4 py-2 bg-linear-to-br from-primary to-primary-dim text-on-primary font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 border-0 text-sm cursor-pointer whitespace-nowrap w-24">
               <span className="material-symbols-outlined text-[18px]">play_arrow</span>
               Actions
             </button>
@@ -125,9 +126,9 @@ export default function PipelineDetailsPage() {
                     <div className="h-2.5 w-full bg-surface-container rounded-full overflow-hidden border border-outline-variant/5">
                       <div 
                         className={`h-full rounded-full transition-all duration-1000 ${
-                          value > 90 ? 'bg-secondary shadow-[0_0_10px_theme(colors.secondary)]' : 
-                          value > 75 ? 'bg-primary shadow-[0_0_10px_theme(colors.primary)]' : 
-                          'bg-error shadow-[0_0_10px_theme(colors.error)]'
+                          value > 90 ? 'bg-secondary shadow-[0_0_10px_var(--color-secondary)]' : 
+                          value > 75 ? 'bg-primary shadow-[0_0_10px_var(--color-primary)]' : 
+                          'bg-error shadow-[0_0_10px_var(--color-error)]'
                         }`}
                         style={{ width: `${value}%` }}
                       ></div>
@@ -188,26 +189,30 @@ export default function PipelineDetailsPage() {
 
           <div className="bg-surface-container-low border border-outline-variant/10 rounded-2xl p-6 shadow-xl">
             <h3 className="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-6">Pipeline Resources</h3>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
-                <span className="text-on-surface-variant text-sm flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[16px]">memory</span> CPU
-                </span>
-                <span className="font-mono font-bold">{pipeline.resources.cpu}%</span>
+            {pipeline.resources ? (
+              <div className="space-y-4">
+                <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
+                  <span className="text-on-surface-variant text-sm flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[16px]">memory</span> CPU
+                  </span>
+                  <span className="font-mono font-bold">{pipeline.resources.cpu}%</span>
+                </div>
+                <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
+                  <span className="text-on-surface-variant text-sm flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[16px]">storage</span> RAM
+                  </span>
+                  <span className="font-mono font-bold">{pipeline.resources.memory}</span>
+                </div>
+                <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
+                  <span className="text-on-surface-variant text-sm flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[16px]">queue</span> Backlog
+                  </span>
+                  <span className="font-mono font-bold">{pipeline.resources.backlog}</span>
+                </div>
               </div>
-              <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
-                <span className="text-on-surface-variant text-sm flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[16px]">storage</span> RAM
-                </span>
-                <span className="font-mono font-bold">{pipeline.resources.memory}</span>
-              </div>
-              <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
-                <span className="text-on-surface-variant text-sm flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[16px]">queue</span> Backlog
-                </span>
-                <span className="font-mono font-bold">{pipeline.resources.backlog}</span>
-              </div>
-            </div>
+            ) : (
+              <div className="text-sm text-on-surface-variant">No live resource telemetry available for this pipeline.</div>
+            )}
           </div>
           
         </div>

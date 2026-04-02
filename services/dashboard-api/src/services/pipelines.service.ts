@@ -51,7 +51,7 @@ export interface PipelineDetail {
     memory: string;
     backlog: number;
     uptime: string;
-  };
+  } | null;
 }
 
 export async function listPipelines(): Promise<PipelineListItem[]> {
@@ -118,13 +118,6 @@ export async function getPipelineDetail(id: string): Promise<PipelineDetail | nu
       .toArray(),
   ]);
 
-  const eventCountNumber = Number(pipeline.eventCount || 0);
-  const cpuEstimate = Math.min(95, Math.max(8, Math.round((latestQuality?.overallScore ? 100 - latestQuality.overallScore : 45))));
-  const backlog = Math.max(0, Math.floor(eventCountNumber * 0.03));
-  const uptimeHours = Math.max(1, Math.floor((Date.now() - pipeline.createdAt.getTime()) / (1000 * 60 * 60)));
-  const uptimeDays = Math.floor(uptimeHours / 24);
-  const uptimeRemainderHours = uptimeHours % 24;
-
   return {
     id: pipeline.id,
     name: pipeline.name,
@@ -148,11 +141,6 @@ export async function getPipelineDetail(id: string): Promise<PipelineDetail | nu
       severity: a.severity,
       detectedAt: a.detectedAt,
     })),
-    resources: {
-      cpu: cpuEstimate,
-      memory: `${Math.max(2, Math.min(32, Math.round(eventCountNumber / 100000) + 2))} GB`,
-      backlog,
-      uptime: `${uptimeDays}d ${uptimeRemainderHours}h`,
-    },
+    resources: null,
   };
 }

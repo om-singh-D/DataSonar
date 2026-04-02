@@ -80,7 +80,6 @@ export async function getOverviewMetrics(): Promise<OverviewMetrics> {
   for (const point of eventsOverTime) {
     if (anomalyTimestamps.has(point.timestamp)) {
       point.isAnomaly = true;
-      point.volume = Math.floor(point.volume * 0.2); // Anomalies show volume drops
     }
   }
 

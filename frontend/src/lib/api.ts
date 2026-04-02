@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+const dashboardApiUrl = process.env.NEXT_PUBLIC_DASHBOARD_API_URL;
+
+if (!dashboardApiUrl) {
+  throw new Error('Missing NEXT_PUBLIC_DASHBOARD_API_URL for frontend API client.');
+}
+
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_DASHBOARD_API_URL || 'http://localhost:4001/api',
+  baseURL: dashboardApiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -9,7 +15,6 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    // Stub: Get token from localStorage or Zustand store
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -23,9 +28,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Stub: Redirect to login when authentication is implemented
       console.warn('Unauthorized access -> interceptor caught 401');
-      // if (typeof window !== 'undefined') window.location.href = '/login';
     }
     return Promise.reject(error);
   }
