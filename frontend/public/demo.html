@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataSonar Control Center - Break My Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-deep: #0c1a24;
+        --bg-mid: #143244;
+        --card: rgba(7, 25, 38, 0.84);
+        --ink: #e8f7ff;
+        --accent: #ffd166;
+        --ok: #00c853;
+        --err: #ff4d6d;
+      }
+
+      body {
+        font-family: "Space Grotesk", "Segoe UI", sans-serif;
+        color: var(--ink);
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 20% 15%, #1d607f 0%, transparent 35%),
+          radial-gradient(circle at 85% 20%, #7a3b2e 0%, transparent 30%),
+          linear-gradient(135deg, var(--bg-deep), var(--bg-mid));
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", Consolas, monospace;
+      }
+
+      .soft-grid {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+
+      .fade-in {
+        animation: fadeIn 450ms ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="soft-grid">
+    <main class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-6 md:px-8 md:py-10">
+      <header class="rounded-2xl border border-cyan-100/20 bg-cyan-950/50 p-5 shadow-2xl backdrop-blur-md md:p-7">
+        <p class="text-xs uppercase tracking-[0.25em] text-cyan-100/80">DataSonar Control Center</p>
+        <h1 class="mt-2 text-3xl font-bold leading-tight md:text-5xl">Break My Pipeline</h1>
+        <p class="mt-3 max-w-3xl text-sm text-cyan-100/80 md:text-base">
+          Edit the event payload and send it to ingestion. Valid payloads should return 202.
+          Broken payloads should return 400 and route to the dead-letter topic.
+        </p>
+      </header>
+
+      <section class="grid gap-6 lg:grid-cols-[2fr,1fr]">
+        <article class="rounded-2xl border border-cyan-100/20 bg-(--card) p-4 shadow-xl backdrop-blur-sm md:p-6">
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-lg font-semibold">Event Payload</h2>
+            <span class="rounded-full border border-amber-300/60 bg-amber-300/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-100">
+              Tip: press malformed values to test DLQ
+            </span>
+          </div>
+          <textarea
+            id="payload"
+            class="mono h-[48vh] w-full resize-y rounded-xl border border-cyan-100/20 bg-slate-950/80 p-4 text-sm leading-relaxed text-cyan-50 outline-none ring-0 transition focus:border-cyan-300/60"
+            spellcheck="false"
+            aria-label="Pipeline payload JSON"
+          ></textarea>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <button
+              id="send-btn"
+              class="rounded-xl bg-(--accent) px-6 py-3 text-base font-bold text-slate-900 shadow-lg transition hover:brightness-105 active:translate-y-px"
+            >
+              Send to Pipeline
+            </button>
+            <button
+              id="load-valid"
+              class="rounded-xl border border-cyan-200/40 bg-cyan-900/40 px-4 py-3 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-800/60"
+            >
+              Load Valid Example
+            </button>
+            <button
+              id="load-bad"
+              class="rounded-xl border border-rose-200/50 bg-rose-900/40 px-4 py-3 text-sm font-semibold text-rose-100 transition hover:bg-rose-800/60"
+            >
+              Load Broken Example
+            </button>
+          </div>
+        </article>
+
+        <aside class="rounded-2xl border border-cyan-100/20 bg-(--card) p-4 shadow-xl backdrop-blur-sm md:p-6">
+          <h2 class="text-lg font-semibold">Response</h2>
+          <p class="mt-2 text-sm text-cyan-100/80">
+            Endpoint:
+            <span class="mono text-cyan-50">http://localhost:3001/api/v1/ingest</span>
+          </p>
+          <div id="response-container" class="mt-4 space-y-3"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const INGEST_URL = 'http://localhost:3001/api/v1/ingest';
+
+      const validPayload = {
+        sourceId: 'demo-source-001',
+        sourceName: 'Expo Demo Stream',
+        sourceType: 'stream',
+        eventType: 'snapshot',
+        timestamp: new Date().toISOString(),
+        data: {
+          schema: {
+            id: 'string',
+            amount: 'number',
+            status: 'string'
+          },
+          records: [
+            {
+              id: 'row-1',
+              amount: 143.33,
+              status: 'ok'
+            }
+          ],
+          recordCount: 10
+        },
+        metadata: {
+          pipeline: 'expo-demo',
+          environment: 'development',
+          tags: ['demo', 'healthy'],
+          batchId: 'batch-001'
+        }
+      };
+
+      const brokenPayload = {
+        sourceName: 'Broken Stream',
+        sourceType: 'magic',
+        eventType: 'snapshot',
+        timestamp: 'yesterday',
+        data: {
+          records: [{ bad: true }],
+          recordCount: -5
+        },
+        metadata: {
+          pipeline: 'expo-demo',
+          environment: 'development'
+        }
+      };
+
+      const payloadInput = document.getElementById('payload');
+      const sendBtn = document.getElementById('send-btn');
+      const loadValidBtn = document.getElementById('load-valid');
+      const loadBadBtn = document.getElementById('load-bad');
+      const responseContainer = document.getElementById('response-container');
+
+      function setPayload(value) {
+        payloadInput.value = JSON.stringify(value, null, 2);
+      }
+
+      function renderBanner(kind, title, message, rawBody) {
+        const palette =
+          kind === 'ok'
+            ? 'border-emerald-300/50 bg-emerald-900/40 text-emerald-100'
+            : 'border-rose-300/50 bg-rose-900/40 text-rose-100';
+
+        responseContainer.innerHTML = `
+          <article class="fade-in rounded-xl border p-4 ${palette}">
+            <h3 class="text-base font-bold">${title}</h3>
+            <p class="mt-2 text-sm leading-relaxed">${message}</p>
+            <pre class="mono mt-3 max-h-72 overflow-auto rounded-lg bg-black/25 p-3 text-xs">${rawBody}</pre>
+          </article>
+        `;
+      }
+
+      async function sendPayload() {
+        let parsed;
+
+        try {
+          parsed = JSON.parse(payloadInput.value);
+        } catch (error) {
+          renderBanner(
+            'error',
+            'Invalid JSON',
+            'Fix JSON syntax in the payload editor before sending.',
+            error.message
+          );
+          return;
+        }
+
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending...';
+
+        try {
+          const response = await fetch(INGEST_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(parsed)
+          });
+
+          const text = await response.text();
+          let body;
+
+          try {
+            body = JSON.parse(text);
+          } catch {
+            body = { raw: text };
+          }
+
+          if (response.status === 202) {
+            renderBanner(
+              'ok',
+              'Accepted (202)',
+              'Event accepted and routed into the raw events stream.',
+              JSON.stringify(body, null, 2)
+            );
+            return;
+          }
+
+          if (response.status === 400) {
+            const issues = Array.isArray(body.errors)
+              ? body.errors.map((entry) => `${entry.field}: ${entry.message}`).join('; ')
+              : 'Unknown validation error';
+
+            renderBanner(
+              'error',
+              'Rejected (400)',
+              `Validation Failed: ${issues}. Event routed to Dead Letter Queue.`,
+              JSON.stringify(body, null, 2)
+            );
+            return;
+          }
+
+          renderBanner(
+            'error',
+            `Unexpected Response (${response.status})`,
+            'Received an unexpected status code from ingestion.',
+            JSON.stringify(body, null, 2)
+          );
+        } catch (error) {
+          renderBanner(
+            'error',
+            'Network Error',
+            'Request failed. Confirm ingestion is running and reachable from this browser.',
+            error.message
+          );
+        } finally {
+          sendBtn.disabled = false;
+          sendBtn.textContent = 'Send to Pipeline';
+        }
+      }
+
+      setPayload(validPayload);
+
+      sendBtn.addEventListener('click', sendPayload);
+      loadValidBtn.addEventListener('click', () => setPayload(validPayload));
+      loadBadBtn.addEventListener('click', () => setPayload(brokenPayload));
+    </script>
+  </body>
+</html>
