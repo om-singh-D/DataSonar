@@ -52,6 +52,8 @@ Open these in your browser:
 1. `http://localhost:8090` -> Kafka UI, navigate to topic `datasonar.raw-events`
 2. `http://localhost:8090` -> Kafka UI, navigate to topic `datasonar.dead-letter`
 3. `http://localhost:3000/demo.html` -> interactive "Break My Pipeline" page
+4. `http://localhost:3000/stitch_assets/api-health-status.html` -> API Health Status Screen UI
+5. `http://localhost:3000/stitch_assets/mock-data-controls.html` -> Mock Data Controls Screen UI
 
 ## Recommended Screen Layout
 

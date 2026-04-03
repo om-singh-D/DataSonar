@@ -61,13 +61,19 @@
   </head>
   <body class="soft-grid">
     <main class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-6 md:px-8 md:py-10">
-      <header class="rounded-2xl border border-cyan-100/20 bg-cyan-950/50 p-5 shadow-2xl backdrop-blur-md md:p-7">
-        <p class="text-xs uppercase tracking-[0.25em] text-cyan-100/80">DataSonar Control Center</p>
-        <h1 class="mt-2 text-3xl font-bold leading-tight md:text-5xl">Break My Pipeline</h1>
-        <p class="mt-3 max-w-3xl text-sm text-cyan-100/80 md:text-base">
-          Edit the event payload and send it to ingestion. Valid payloads should return 202.
-          Broken payloads should return 400 and route to the dead-letter topic.
-        </p>
+      <header class="rounded-2xl border border-cyan-100/20 bg-cyan-950/50 p-5 shadow-2xl backdrop-blur-md md:p-7 flex justify-between items-center">
+        <div>
+          <p class="text-xs uppercase tracking-[0.25em] text-cyan-100/80">DataSonar Control Center</p>
+          <h1 class="mt-2 text-3xl font-bold leading-tight md:text-5xl">Break My Pipeline</h1>
+          <p class="mt-3 max-w-3xl text-sm text-cyan-100/80 md:text-base">
+            Edit the event payload and send it to ingestion. Valid payloads should return 202.
+            Broken payloads should return 400 and route to the dead-letter topic.
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 shrink-0">
+          <a href="/stitch_assets/api-health-status.html" class="rounded border border-cyan-300/30 bg-cyan-900/30 px-3 py-1.5 text-sm font-medium text-cyan-100 hover:bg-cyan-800/50 transition text-center">API Health Status</a>
+          <a href="/stitch_assets/mock-data-controls.html" class="rounded border border-cyan-300/30 bg-cyan-900/30 px-3 py-1.5 text-sm font-medium text-cyan-100 hover:bg-cyan-800/50 transition text-center">Mock Data Controls</a>
+        </div>
       </header>
 
       <section class="grid gap-6 lg:grid-cols-[2fr,1fr]">

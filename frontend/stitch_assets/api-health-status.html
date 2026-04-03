@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#fcf8fb",
+              "error-container": "#9f0519",
+              "primary": "#85adff",
+              "on-tertiary-fixed-variant": "#780021",
+              "surface-bright": "#2c2c2f",
+              "surface-container-low": "#131315",
+              "on-secondary-container": "#e1ffec",
+              "on-primary": "#002c66",
+              "inverse-on-surface": "#565457",
+              "primary-fixed-dim": "#5391ff",
+              "tertiary-container": "#fc4563",
+              "tertiary": "#ff6f7e",
+              "secondary-container": "#006c49",
+              "surface-tint": "#85adff",
+              "secondary-dim": "#58e7ab",
+              "on-tertiary-container": "#100001",
+              "surface-container-high": "#1f1f22",
+              "surface-dim": "#0e0e10",
+              "on-secondary-fixed": "#00452d",
+              "secondary": "#69f6b8",
+              "error-dim": "#d7383b",
+              "on-background": "#f9f5f8",
+              "surface-variant": "#262528",
+              "on-surface-variant": "#adaaad",
+              "on-secondary-fixed-variant": "#006544",
+              "on-tertiary": "#490010",
+              "on-tertiary-fixed": "#39000b",
+              "error": "#ff716c",
+              "surface": "#0e0e10",
+              "on-surface": "#f9f5f8",
+              "on-primary-fixed": "#000000",
+              "tertiary-dim": "#ff6f7e",
+              "primary-dim": "#699cff",
+              "on-error-container": "#ffa8a3",
+              "on-error": "#490006",
+              "tertiary-fixed-dim": "#ff7986",
+              "tertiary-fixed": "#ff9099",
+              "background": "#0e0e10",
+              "inverse-primary": "#005bc4",
+              "secondary-fixed": "#69f6b8",
+              "on-primary-fixed-variant": "#002a62",
+              "primary-fixed": "#6e9fff",
+              "surface-container": "#19191c",
+              "primary-container": "#6e9fff",
+              "outline": "#767577",
+              "surface-container-lowest": "#000000",
+              "secondary-fixed-dim": "#58e7ab",
+              "surface-container-highest": "#262528",
+              "on-secondary": "#005a3c",
+              "on-primary-container": "#002150",
+              "outline-variant": "#48474a"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(31, 31, 34, 0.7);
+            backdrop-filter: blur(16px);
+        }
+        .pulse-accent {
+            border-left: 2px solid #69f6b8;
+        }
+        .pulse-error {
+            border-left: 2px solid #ff716c;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262528;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 flex flex-col fixed left-0 top-0 overflow-y-auto z-40 bg-surface border-r border-outline-variant/10">
+<div class="flex flex-col py-8 px-4 gap-2 h-full">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">radar</span>
+</div>
+<div>
+<h2 class="text-on-surface font-bold tracking-tight text-sm">Observability</h2>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-widest">High-Density Pulse</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<!-- Active Tab: Health Status -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded transition-all duration-200 text-on-surface bg-surface-container border-l-2 border-primary font-semibold" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+<span class="text-sm">Health Status</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded transition-all duration-200 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="text-sm">Activity Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded transition-all duration-200 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="text-sm">Mock Controls</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded transition-all duration-200 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="text-sm">API Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">menu_book</span>
+<span class="text-xs">Documentation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+<span class="text-xs">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-64 min-h-screen bg-surface flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full h-16 flex items-center justify-between sticky top-0 z-50 bg-surface-container-low px-6">
+<div class="flex items-center gap-4">
+<span class="text-lg font-bold tracking-tighter text-on-surface">DataSonar</span>
+<div class="h-4 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">System Live</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-surface-container-lowest px-4 py-1.5 rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none text-xs text-on-surface focus:ring-0 w-48 placeholder:text-on-surface-variant/50" placeholder="Search clusters..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:text-primary transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/20 cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional male software engineer in a dark studio with blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTADEUQ6azKXWoH6lESv2V3JL2l5t2V_totIxX952HvWb742DYF2E7YVJWYH99S1fk1b4J7j5Uj2oK41PNc1Pb3b5HctllN5y9urWUIZRKKZZQ1ObntGjuJb9Bi-dRMe4i57Wj1ZyBbFivw762FFMAmsXD0j5mWCj4iK__DwPe4pGrbr-Oscw4cuq-YzPrCqksO9OZ7v7Ns1KoDEnjNMpsrmzQvaZ4SED9IQ0-Bh_cQQowjI0A22VfFTIO42JO_pDrOwVz1q2K59uP"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-8 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Hero Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Status Card -->
+<div class="bg-surface-container p-6 rounded-xl flex flex-col gap-4 pulse-accent">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">API Status</span>
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+</div>
+<div>
+<div class="text-3xl font-bold tracking-tight text-on-surface">RUNNING</div>
+<div class="text-xs text-on-surface-variant mt-1">On Port <span class="text-primary font-mono">4000</span></div>
+</div>
+</div>
+<!-- Uptime Card -->
+<div class="bg-surface-container p-6 rounded-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">Global Uptime</span>
+<span class="material-symbols-outlined text-primary text-lg">timer</span>
+</div>
+<div>
+<div class="text-3xl font-bold tracking-tight text-on-surface">99.998<span class="text-primary-dim">%</span></div>
+<div class="text-xs text-on-surface-variant mt-1">Last 30 days performance</div>
+</div>
+</div>
+<!-- Request Counter -->
+<div class="bg-surface-container p-6 rounded-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">Total Requests</span>
+<span class="material-symbols-outlined text-on-surface-variant text-lg">swap_horiz</span>
+</div>
+<div>
+<div class="text-3xl font-bold tracking-tight text-on-surface">1.2M+</div>
+<div class="text-xs text-on-surface-variant mt-1">Handled this session</div>
+</div>
+</div>
+<!-- Latency -->
+<div class="bg-surface-container p-6 rounded-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">Avg Latency</span>
+<span class="material-symbols-outlined text-tertiary text-lg">bolt</span>
+</div>
+<div>
+<div class="text-3xl font-bold tracking-tight text-on-surface">24<span class="text-tertiary-dim">ms</span></div>
+<div class="text-xs text-on-surface-variant mt-1">P95 Response time</div>
+</div>
+</div>
+</div>
+<!-- Main Stage: Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Real-time Mock Logs (Wide) -->
+<div class="lg:col-span-2 bg-surface-container-low rounded-xl overflow-hidden flex flex-col h-[500px]">
+<div class="p-5 flex items-center justify-between bg-surface-container/50 border-b border-outline-variant/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<h3 class="text-sm font-semibold tracking-tight">Mock Data Generator Logs</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-medium text-on-surface-variant">AUTO-SCROLL</span>
+<div class="w-8 h-4 bg-primary/20 rounded-full relative flex items-center px-1">
+<div class="w-2.5 h-2.5 bg-primary rounded-full absolute right-1"></div>
+</div>
+</div>
+</div>
+<div class="flex-1 p-4 font-mono text-[11px] overflow-y-auto space-y-2 bg-surface-container-lowest">
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:01.042</span>
+<span class="text-secondary">[SUCCESS]</span>
+<span class="text-on-surface/80">Generated 500 telemetry payloads for user-782</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:02.115</span>
+<span class="text-primary">[INFO]</span>
+<span class="text-on-surface/80">Broadcasting pulse to 14 active WebSocket nodes</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:02.890</span>
+<span class="text-tertiary">[WARN]</span>
+<span class="text-on-surface/80">Buffer reaching 85% capacity in US-EAST-1 cluster</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:03.402</span>
+<span class="text-secondary">[SUCCESS]</span>
+<span class="text-on-surface/80">Injected mock latency spike (50ms) to testing environment</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:04.111</span>
+<span class="text-primary">[INFO]</span>
+<span class="text-on-surface/80">Cleaning up 42 orphaned sessions...</span>
+</div>
+<div class="flex gap-4 opacity-50">
+<span class="text-on-surface-variant shrink-0">14:20:04.992</span>
+<span class="text-secondary">[SUCCESS]</span>
+<span class="text-on-surface/80">Heartbeat acknowledged from database-primary-node</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:05.102</span>
+<span class="text-secondary">[SUCCESS]</span>
+<span class="text-on-surface/80">Generated 500 telemetry payloads for user-901</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:05.450</span>
+<span class="text-primary">[INFO]</span>
+<span class="text-on-surface/80">Cache miss at layer-1, re-routing to layer-2</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant shrink-0">14:20:05.800</span>
+<span class="text-secondary">[SUCCESS]</span>
+<span class="text-on-surface/80">Handshake complete with edge-gateway-alpha</span>
+</div>
+</div>
+</div>
+<!-- WebSocket Connections (Tall) -->
+<div class="bg-surface-container rounded-xl flex flex-col h-[500px]">
+<div class="p-5 border-b border-outline-variant/5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-semibold tracking-tight">Active Sockets</h3>
+<span class="text-xs font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">14 Active</span>
+</div>
+<div class="relative w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="absolute inset-0 bg-primary/40 w-2/3"></div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Connection Item -->
+<div class="p-3 bg-surface-container-high rounded border border-outline-variant/5 hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-mono text-on-surface">WSS://node-a492</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex justify-between items-end">
+<div class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Throughput</div>
+<div class="text-xs font-mono text-on-surface">12.4 KB/s</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-high rounded border border-outline-variant/5 hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-mono text-on-surface">WSS://edge-client-v3</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex justify-between items-end">
+<div class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Throughput</div>
+<div class="text-xs font-mono text-on-surface">4.1 KB/s</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-high rounded border border-outline-variant/5 hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-mono text-on-surface">WSS://admin-panel-88</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex justify-between items-end">
+<div class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Throughput</div>
+<div class="text-xs font-mono text-on-surface">0.8 KB/s</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-high rounded border border-outline-variant/5 hover:bg-surface-container-highest transition-colors pulse-error">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-mono text-on-surface">WSS://legacy-api-bridge</span>
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+</div>
+<div class="flex justify-between items-end">
+<div class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Status</div>
+<div class="text-xs font-mono text-error">RECONNECTING</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-high rounded border border-outline-variant/5 hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-mono text-on-surface">WSS://node-f112</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex justify-between items-end">
+<div class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Throughput</div>
+<div class="text-xs font-mono text-on-surface">22.8 KB/s</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Data Visualization Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- System Health Summary -->
+<div class="bg-surface-container p-6 rounded-xl">
+<h3 class="text-sm font-semibold mb-6">Environment Variables</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/10">
+<span class="text-xs text-on-surface-variant">NODE_ENV</span>
+<span class="text-xs font-mono text-on-surface bg-surface-container-highest px-2 py-1 rounded">production</span>
+</div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/10">
+<span class="text-xs text-on-surface-variant">REDIS_PERSISTENCE</span>
+<span class="text-xs font-mono text-secondary">enabled</span>
+</div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/10">
+<span class="text-xs text-on-surface-variant">WORKER_THREADS</span>
+<span class="text-xs font-mono text-on-surface">12</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface-variant">MOCK_GENERATOR_SEED</span>
+<span class="text-xs font-mono text-primary">sonar-v2-gamma</span>
+</div>
+</div>
+</div>
+<!-- API Interaction Heatmap -->
+<div class="bg-surface-container p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, #85adff 1px, transparent 0); background-size: 16px 16px;"></div>
+</div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-sm font-semibold">Load Prediction</h3>
+<span class="text-[10px] text-on-surface-variant">NEXT 6 HOURS</span>
+</div>
+<div class="flex items-end gap-1 h-32">
+<div class="flex-1 bg-primary/20 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[35%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-[85%]"></div>
+<div class="flex-1 bg-secondary rounded-t h-[95%]"></div>
+<div class="flex-1 bg-primary/80 rounded-t h-[70%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[50%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[30%]"></div>
+<div class="flex-1 bg-primary/10 rounded-t h-[20%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[45%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[35%]"></div>
+<div class="flex-1 bg-primary/10 rounded-t h-[15%]"></div>
+</div>
+<div class="mt-4 flex justify-between text-[9px] text-on-surface-variant uppercase font-bold tracking-widest">
+<span>15:00</span>
+<span>18:00</span>
+<span>21:00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action for Quick Actions (Suppressed on Detail, but relevant for Dashboard Status) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary-dim shadow-xl shadow-surface-container-lowest/50 flex items-center justify-center text-on-primary hover:scale-105 active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</body></html>

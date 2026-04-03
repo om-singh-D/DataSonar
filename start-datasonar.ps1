@@ -1,18 +1,7 @@
-param(
-    [switch]$SkipSeed
-)
-
 $ErrorActionPreference = 'Stop'
 
 Write-Host "[DataSonar] Starting backend services..." -ForegroundColor Cyan
 docker compose up -d postgres mongodb redis dashboard-api
-
-if (-not $SkipSeed) {
-    Write-Host "[DataSonar] Seeding MongoDB sample data..." -ForegroundColor Cyan
-    node scripts/seed-mongo.js
-} else {
-    Write-Host "[DataSonar] Skipping MongoDB seed." -ForegroundColor Yellow
-}
 
 Write-Host "[DataSonar] Checking dashboard-api health..." -ForegroundColor Cyan
 $health = $null

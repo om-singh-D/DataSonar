@@ -63,6 +63,7 @@ The system is split into multiple independent services, robust infrastructure ba
 *   **Responsibilities:** 
     *   Provides an interactive UI summarizing data health.
     *   Consumes the REST API and subscribes to WebSockets for real-time dashboards (pipelines, alerts, anomalies).
+    *   Includes generated prototype UI concepts via Stitch (`/frontend/stitch_assets/`) for rapid iteration of screens like API Health Status and Mock Data Controls.
 
 ---
 

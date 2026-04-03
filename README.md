@@ -84,6 +84,14 @@ docker-compose up -d
 docker-compose ps
 ```
 
+### Start Full App (PowerShell)
+
+Use the launcher script to start Docker services, check API health, open the dashboard, and run the frontend dev server.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-datasonar.ps1
+```
+
 ## 📅 Development Roadmap
 
 - [x] Project setup & folder structure
