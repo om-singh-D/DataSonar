@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DataSonar | Dashboard Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#100001",
+              "on-tertiary": "#490010",
+              "error-dim": "#d7383b",
+              "outline": "#767577",
+              "secondary-container": "#006c49",
+              "error": "#ff716c",
+              "on-error": "#490006",
+              "inverse-on-surface": "#565457",
+              "surface-bright": "#2c2c2f",
+              "primary-dim": "#699cff",
+              "surface-container-low": "#131315",
+              "on-primary": "#002c66",
+              "outline-variant": "#48474a",
+              "on-error-container": "#ffa8a3",
+              "tertiary-dim": "#ff6f7e",
+              "on-surface": "#f9f5f8",
+              "secondary": "#69f6b8",
+              "secondary-fixed-dim": "#58e7ab",
+              "secondary-dim": "#58e7ab",
+              "on-tertiary-fixed-variant": "#780021",
+              "surface-container-lowest": "#000000",
+              "on-secondary": "#005a3c",
+              "inverse-surface": "#fcf8fb",
+              "surface-variant": "#262528",
+              "tertiary": "#ff6f7e",
+              "on-primary-fixed-variant": "#002a62",
+              "on-secondary-fixed-variant": "#006544",
+              "primary-container": "#6e9fff",
+              "on-tertiary-fixed": "#39000b",
+              "surface-container-highest": "#262528",
+              "primary-fixed": "#6e9fff",
+              "tertiary-fixed": "#ff9099",
+              "on-background": "#f9f5f8",
+              "inverse-primary": "#005bc4",
+              "surface-dim": "#0e0e10",
+              "surface": "#0e0e10",
+              "primary-fixed-dim": "#5391ff",
+              "surface-tint": "#85adff",
+              "error-container": "#9f0519",
+              "secondary-fixed": "#69f6b8",
+              "on-secondary-fixed": "#00452d",
+              "on-secondary-container": "#e1ffec",
+              "primary": "#85adff",
+              "on-primary-container": "#002150",
+              "surface-container-high": "#1f1f22",
+              "tertiary-container": "#fc4563",
+              "background": "#0e0e10",
+              "surface-container": "#19191c",
+              "on-surface-variant": "#adaaad",
+              "on-primary-fixed": "#000000",
+              "tertiary-fixed-dim": "#ff7986"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(31, 31, 34, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary/30 selection:text-primary-dim">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-[#0e0e10] border-r border-[#48474a]/15 z-50 font-inter antialiased text-sm tracking-tight">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-lg" style="font-variation-settings: 'FILL' 1;">radar</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tighter text-[#f9f5f8]">DataSonar</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">Observability</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col p-4 gap-2">
+<!-- Active Tab: Overview -->
+<a class="flex items-center gap-3 px-3 py-2 text-[#85adff] bg-[#19191c] font-semibold rounded-md transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span>Pipelines</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span>Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-[#48474a]/15 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar Anchor -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-[#131315]/70 backdrop-blur-xl border-b border-[#48474a]/15 shadow-sm flex justify-between items-center px-8 font-inter text-sm font-medium">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative group w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg pl-10 pr-4 py-2 text-on-surface focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/50" placeholder="Search clusters, metrics, or traces..." type="text"/>
+</div>
+<nav class="flex items-center gap-6">
+<a class="text-[#85adff] border-b-2 border-[#85adff] pb-1 transition-opacity" href="#">Prod-Cluster-01</a>
+<a class="text-[#adaaad] hover:text-[#f9f5f8] transition-opacity" href="#">Staging</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">account_tree</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30 ml-2">
+<img class="w-full h-full object-cover" data-alt="professional headshot of a software engineer in a dark tech environment with blue atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQmHtdV-hPVP1cB5UUbAY2iBOJIY9PNgkNocBbIJ1ASI7wPjjsYAd5hsoDo_o7zSsLU53MiBP_TJLdsjcm0Pz8Pi83hIjcpD3xts1ypcpvfv6-qaboZ8sav6S1HkAFlB3pqQwUA90fnJuwyS2zL5-VlnQJbAErK7LZG294DYqr9d5931VhHa9G1PNMhGv4lVGRvhZJ8ZAnDrZ18xa9qY9i-R54OmbpnXtwHVeKkZuqrfDWnBk9yP1eQAYwWJO7OvyjP8oMWJ1DEUUN"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-24 px-8 pb-12">
+<!-- Dashboard Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Dashboard Overview</h2>
+<p class="text-on-surface-variant mt-1">Real-time telemetry and pipeline health across clusters.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-container px-4 py-2 rounded-lg border border-outline-variant/10 text-sm font-medium">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">calendar_today</span>
+<span>Oct 24 - Oct 31, 2023</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm ml-2">expand_more</span>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-primary to-primary-dim text-on-primary font-semibold rounded-md shadow-lg shadow-primary/10 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">refresh</span>
+<span>Refresh</span>
+</button>
+</div>
+</div>
+<!-- Metrics Grid: StatCards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- StatCard 1 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-primary-dim relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Total Events</span>
+<span class="material-symbols-outlined text-primary text-xl">database</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold font-mono">1.2B</span>
+<span class="text-secondary text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-0.5">trending_up</span>
+                            12%
+                        </span>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 tracking-tight">Last 24 hours processing</p>
+</div>
+<!-- StatCard 2 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-secondary relative overflow-hidden group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Avg Quality</span>
+<span class="material-symbols-outlined text-secondary text-xl">verified</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold font-mono">94.2%</span>
+<span class="text-secondary text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-0.5">trending_up</span>
+                            0.4%
+                        </span>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 tracking-tight">Schema validation score</p>
+</div>
+<!-- StatCard 3 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-error relative overflow-hidden group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Active Alerts</span>
+<span class="material-symbols-outlined text-error text-xl">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold font-mono">12</span>
+<span class="text-error text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-0.5">priority_high</span>
+                            Critical
+                        </span>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 tracking-tight">Requiring immediate attention</p>
+</div>
+<!-- StatCard 4 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-tertiary relative overflow-hidden group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Anomalies</span>
+<span class="material-symbols-outlined text-tertiary text-xl">analytics</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold font-mono">3</span>
+<span class="text-on-surface-variant text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-0.5">remove</span>
+                            Stable
+                        </span>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 tracking-tight">Detected outliers (6h)</p>
+</div>
+</div>
+<!-- Charts Grid -->
+<div class="space-y-6">
+<!-- Large Chart: Quality Score Over Time -->
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/5 shadow-2xl">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-lg font-bold">Quality Score Over Time</h3>
+<p class="text-sm text-on-surface-variant">Trend analysis for 7-day rolling window</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high px-3 py-1 rounded text-xs font-semibold text-primary">7D</button>
+<button class="bg-surface-container px-3 py-1 rounded text-xs font-semibold hover:bg-surface-container-high transition-colors">30D</button>
+<button class="bg-surface-container px-3 py-1 rounded text-xs font-semibold hover:bg-surface-container-high transition-colors">90D</button>
+</div>
+</div>
+<div class="h-64 relative flex items-end justify-between gap-1">
+<!-- Simulated Line Chart with SVG -->
+<div class="absolute inset-0 flex flex-col justify-between py-2 pointer-events-none">
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+<div class="border-b border-outline-variant/10 w-full h-0"></div>
+</div>
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#85adff" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#85adff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0 150 Q 150 180, 250 100 T 500 120 T 750 40 T 1000 80 L 1000 200 L 0 200 Z" fill="url(#chartGradient)"></path>
+<path d="M0 150 Q 150 180, 250 100 T 500 120 T 750 40 T 1000 80" fill="none" stroke="#85adff" stroke-width="3"></path>
+</svg>
+<!-- Pulse Point -->
+<div class="absolute left-3/4 top-[20%] w-4 h-4 bg-primary-dim rounded-full shadow-[0_0_15px_rgba(133,173,255,0.6)] animate-pulse">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-surface-container-highest px-2 py-1 rounded text-[10px] whitespace-nowrap border border-outline-variant/20">
+<span class="text-on-surface-variant">Quality Peak:</span> 98.4%
+                            </div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[10px] uppercase tracking-tighter text-on-surface-variant font-bold">
+<span>24 Oct</span>
+<span>25 Oct</span>
+<span>26 Oct</span>
+<span>27 Oct</span>
+<span>28 Oct</span>
+<span>29 Oct</span>
+<span>30 Oct</span>
+</div>
+</div>
+<!-- Two Column Sub-Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Bar Chart: Events per Source -->
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/5 shadow-xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-2 h-6 bg-secondary rounded-full"></div>
+<h3 class="font-bold tracking-tight">Events per Source (Top 5)</h3>
+</div>
+<div class="space-y-5">
+<div class="space-y-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">AWS Firehose</span>
+<span class="font-mono">428M</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">Kafka-Cluster-Blue</span>
+<span class="font-mono">312M</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">GCP PubSub</span>
+<span class="font-mono">205M</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[45%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">Snowflake Sync</span>
+<span class="font-mono">118M</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[25%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Area Chart: Anomaly Trend -->
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/5 shadow-xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-2 h-6 bg-tertiary rounded-full"></div>
+<h3 class="font-bold tracking-tight">Anomaly Trend (Hourly)</h3>
+</div>
+<div class="h-44 flex items-end gap-1 px-2">
+<!-- Simulated Sparkline Bars -->
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[20%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[15%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/80 h-[90%] rounded-t-sm relative group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 hidden group-hover:block bg-surface-container-high text-[10px] p-1 rounded border border-outline-variant/20 whitespace-nowrap">Spike Detected</div>
+</div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[25%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[10%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[20%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[35%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[45%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/60 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container hover:bg-tertiary/40 transition-colors h-[15%] rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[9px] uppercase tracking-widest text-on-surface-variant font-bold">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>23:59</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Alerts Bento Segment -->
+<div class="mt-10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-bold tracking-tight">System Events</h3>
+<a class="text-sm text-primary hover:underline font-medium" href="#">View detailed audit log</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/5">
+<table class="w-full text-left text-sm">
+<thead class="bg-surface-container text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">
+<tr>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Pipeline</th>
+<th class="px-6 py-4">Issue</th>
+<th class="px-6 py-4">Time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-error-container/20 text-error text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> CRITICAL
+                                        </span>
+</td>
+<td class="px-6 py-4 font-medium">customer_data_sync</td>
+<td class="px-6 py-4 text-on-surface-variant">Schema mismatch detected on 'user_id' field</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono">2m ago</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-highest text-tertiary text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> ANOMALY
+                                        </span>
+</td>
+<td class="px-6 py-4 font-medium">billing_events_v2</td>
+<td class="px-6 py-4 text-on-surface-variant">Unexpected 40% volume drop</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono">14m ago</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> RESOLVED
+                                        </span>
+</td>
+<td class="px-6 py-4 font-medium">marketing_attribution</td>
+<td class="px-6 py-4 text-on-surface-variant">Latency spike normalized after scale-up</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono">1h ago</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/5 flex flex-col justify-between">
+<div>
+<h4 class="font-bold mb-2">Cluster Health</h4>
+<p class="text-sm text-on-surface-variant mb-6">Distribution of node performance across global clusters.</p>
+<div class="flex items-center justify-center py-4">
+<!-- Donut Chart Simulation -->
+<div class="relative w-32 h-32 rounded-full border-[12px] border-secondary border-l-primary border-b-error flex items-center justify-center">
+<div class="text-center">
+<span class="block text-xl font-bold">98%</span>
+<span class="text-[9px] uppercase text-on-surface-variant font-bold">Online</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-tighter">
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary"></span> Healthy</div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary"></span> Warning</div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-error"></span> Down</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only on Dashboard) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-dim text-on-primary rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform active:scale-95 group z-50">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="absolute right-full mr-4 px-3 py-1 bg-surface-container-high text-on-surface text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-outline-variant/20 shadow-xl">New Alert Rule</span>
+</button>
+</body></html>

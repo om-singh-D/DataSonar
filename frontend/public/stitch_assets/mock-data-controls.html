@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#fcf8fb",
+            "error-container": "#9f0519",
+            "primary": "#85adff",
+            "on-tertiary-fixed-variant": "#780021",
+            "surface-bright": "#2c2c2f",
+            "surface-container-low": "#131315",
+            "on-secondary-container": "#e1ffec",
+            "on-primary": "#002c66",
+            "inverse-on-surface": "#565457",
+            "primary-fixed-dim": "#5391ff",
+            "tertiary-container": "#fc4563",
+            "tertiary": "#ff6f7e",
+            "secondary-container": "#006c49",
+            "surface-tint": "#85adff",
+            "secondary-dim": "#58e7ab",
+            "on-tertiary-container": "#100001",
+            "surface-container-high": "#1f1f22",
+            "surface-dim": "#0e0e10",
+            "on-secondary-fixed": "#00452d",
+            "secondary": "#69f6b8",
+            "error-dim": "#d7383b",
+            "on-background": "#f9f5f8",
+            "surface-variant": "#262528",
+            "on-surface-variant": "#adaaad",
+            "on-secondary-fixed-variant": "#006544",
+            "on-tertiary": "#490010",
+            "on-tertiary-fixed": "#39000b",
+            "error": "#ff716c",
+            "surface": "#0e0e10",
+            "on-surface": "#f9f5f8",
+            "on-primary-fixed": "#000000",
+            "tertiary-dim": "#ff6f7e",
+            "primary-dim": "#699cff",
+            "on-error-container": "#ffa8a3",
+            "on-error": "#490006",
+            "tertiary-fixed-dim": "#ff7986",
+            "tertiary-fixed": "#ff9099",
+            "background": "#0e0e10",
+            "inverse-primary": "#005bc4",
+            "secondary-fixed": "#69f6b8",
+            "on-primary-fixed-variant": "#002a62",
+            "primary-fixed": "#6e9fff",
+            "surface-container": "#19191c",
+            "primary-container": "#6e9fff",
+            "outline": "#767577",
+            "surface-container-lowest": "#000000",
+            "secondary-fixed-dim": "#58e7ab",
+            "surface-container-highest": "#262528",
+            "on-secondary": "#005a3c",
+            "on-primary-container": "#002150",
+            "outline-variant": "#48474a"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0e0e10; }
+    ::-webkit-scrollbar-thumb { background: #262528; border-radius: 10px; }
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      background: rgba(31, 31, 34, 0.7);
+    }
+    .pulse-glow {
+      box-shadow: 0 0 15px rgba(133, 173, 255, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-hidden">
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 flex flex-col fixed left-0 top-0 overflow-y-auto z-40 bg-surface-dim border-r border-transparent">
+<div class="flex flex-col py-8 px-4 gap-2 h-full">
+<div class="mb-8 px-4">
+<h2 class="text-[#f9f5f8] font-headline text-lg font-bold tracking-tighter">DataSonar</h2>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1">Observability Engine</p>
+</div>
+<nav class="space-y-1">
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+<span class="text-sm">Health Status</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="text-sm">Activity Logs</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-[#f9f5f8] bg-surface-container border-l-2 border-primary font-semibold cursor-pointer rounded-r-lg">
+<span class="material-symbols-outlined" data-icon="science" style="font-variation-settings: 'FILL' 1;">science</span>
+<span class="text-sm">Mock Controls</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="text-sm">API Settings</span>
+</div>
+</nav>
+<div class="mt-auto pt-8 space-y-1">
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="text-sm">Documentation</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-sm">Support</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-64 flex-1 h-screen overflow-y-auto bg-surface relative">
+<!-- Top Bar -->
+<header class="w-full h-16 flex items-center justify-between sticky top-0 z-50 bg-surface-container-low px-8">
+<div class="flex items-center gap-4">
+<h1 class="text-on-surface font-headline font-bold text-xl tracking-tight">Mock Data Controls</h1>
+<span class="bg-surface-container-highest text-secondary text-[10px] font-bold px-2 py-0.5 rounded tracking-widest uppercase">Sandboxed</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input class="bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary/30 text-sm py-2 px-10 rounded-md w-64 text-on-surface transition-all" placeholder="Search parameters..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg" data-icon="search">search</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-on-surface transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-on-surface transition-colors" data-icon="help_outline">help_outline</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a technical engineer in a dark workspace with subtle blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqORYtmth3AYQUTXJoZpLZOKa1SZVEewv-bgEYiNZMH1w7yhX6exIRq88Agfvc0BFUyAqM5AwLPPLpjGC36nXZmdIy-2h67yXzNtprTufsA8muHDB4HxJFUYTsIlT-EGFFRxMMIKwV6JzBHtxcg1OGg2D6vT1HsQOsKFFjXo4xOJbgKcyff4RS9oFthku-pZZz9wpW9QDxmA_JpmpslDj8dnQODCE9QvV2S7Jq0_PuiUOiVYXwwArqc6v8e_AqbmnUA9v_CAVK7GCf"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Layout -->
+<div class="p-8 grid grid-cols-12 gap-8 max-w-[1600px] mx-auto">
+<!-- Left Column: Generator Configuration -->
+<section class="col-span-12 lg:col-span-7 space-y-8">
+<!-- Generator Controls Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Anomaly Generator Card -->
+<div class="bg-surface-container border-l-2 border-primary p-5 rounded-r-xl pulse-glow">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="warning">warning</span>
+</div>
+<div>
+<h3 class="text-on-surface font-bold text-sm">Anomaly Generator</h3>
+<p class="text-on-surface-variant text-[11px]">Simulate unexpected data spikes</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="space-y-4 pt-2">
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Frequency</span>
+<span class="text-primary">12/min</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Severity Level</span>
+<span class="text-primary">High</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range" value="80"/>
+</div>
+</div>
+</div>
+<!-- Alert Generator Card -->
+<div class="bg-surface-container border-l-2 border-tertiary p-5 rounded-r-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="notifications_active" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+<div>
+<h3 class="text-on-surface font-bold text-sm">Alert Generator</h3>
+<p class="text-on-surface-variant text-[11px]">Trigger synthetic system alerts</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+<div class="space-y-4 pt-2">
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Burst Rate</span>
+<span class="text-tertiary">Low</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" type="range" value="20"/>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Criticality</span>
+<span class="text-tertiary">Medium</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" type="range" value="50"/>
+</div>
+</div>
+</div>
+<!-- Quality Update Generator Card -->
+<div class="bg-surface-container border-l-2 border-secondary p-5 rounded-r-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="query_stats">query_stats</span>
+</div>
+<div>
+<h3 class="text-on-surface font-bold text-sm">Quality Updates</h3>
+<p class="text-on-surface-variant text-[11px]">Stream data freshness metrics</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="space-y-4 pt-2">
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Update Interval</span>
+<span class="text-secondary">0.5s</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" type="range" value="90"/>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Drift Sensitivity</span>
+<span class="text-secondary">Minimal</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" type="range" value="15"/>
+</div>
+</div>
+</div>
+<!-- Network Latency Mock Card -->
+<div class="bg-surface-container border-l-2 border-outline-variant p-5 rounded-r-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="speed">speed</span>
+</div>
+<div>
+<h3 class="text-on-surface font-bold text-sm">Latency Mock</h3>
+<p class="text-on-surface-variant text-[11px]">Inject artificial delay</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-outline"></div>
+</label>
+</div>
+<div class="space-y-4 pt-2 opacity-50">
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Delay (ms)</span>
+<span>0ms</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-not-allowed" disabled="" type="range"/>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
+<span>Jitter</span>
+<span>None</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-not-allowed" disabled="" type="range"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Master Global Control -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 flex items-center justify-between">
+<div>
+<h2 class="text-on-surface font-headline font-semibold text-lg">Global Simulation State</h2>
+<p class="text-on-surface-variant text-sm mt-1">Override all active generators or reset parameters to default.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 bg-surface-container-highest text-on-surface font-semibold text-sm rounded-md hover:bg-surface-variant transition-colors" id="reset-all-btn">Reset All</button>
+<button class="px-6 py-2 bg-gradient-to-br from-primary to-primary-dim text-on-primary font-bold text-sm rounded-md shadow-lg shadow-primary/20 flex items-center gap-2" id="run-simulation-btn">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+              Run Simulation
+            </button>
+</div>
+</div>
+</section>
+<!-- Right Column: Visual Confirmation & Live Stream -->
+<section class="col-span-12 lg:col-span-5 flex flex-col gap-8">
+<!-- Live Stream Visualization -->
+<div class="bg-surface-container-low rounded-xl flex-1 flex flex-col overflow-hidden min-h-[400px]">
+<div class="p-5 border-b border-outline-variant/10 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<h3 class="text-on-surface font-bold text-xs uppercase tracking-widest">Live Generator Output</h3>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono" id="feed-id-value">SONAR_FEED_ID: 0x2A991</span>
+</div>
+<div class="flex-1 p-6 font-mono text-[11px] leading-relaxed overflow-y-auto space-y-2 text-on-surface-variant" id="mock-live-output">
+<div class="flex gap-4 text-on-surface">
+<span class="text-primary opacity-50">14:22:01.03</span>
+<span class="text-primary font-bold">[ANOMALY]</span>
+<span>Detected spike in vertex_cluster_04: value=184.2</span>
+</div>
+<div class="flex gap-4">
+<span class="opacity-50">14:22:00.88</span>
+<span class="text-secondary font-bold">[QUALITY]</span>
+<span>Metadata integrity verified for schema 'user_prod_v2'</span>
+</div>
+<div class="flex gap-4">
+<span class="opacity-50">14:22:00.45</span>
+<span class="text-secondary font-bold">[QUALITY]</span>
+<span>Batch processing complete: 42.1ms (99.8% fresh)</span>
+</div>
+<div class="flex gap-4 text-on-surface">
+<span class="text-primary opacity-50">14:21:59.12</span>
+<span class="text-primary font-bold">[ANOMALY]</span>
+<span>Threshold violation on metric 'disk_io_wait'</span>
+</div>
+<div class="flex gap-4">
+<span class="opacity-50">14:21:58.77</span>
+<span class="text-secondary font-bold">[QUALITY]</span>
+<span>System health check: NOMINAL</span>
+</div>
+<div class="flex gap-4">
+<span class="opacity-50">14:21:58.30</span>
+<span class="text-secondary font-bold">[QUALITY]</span>
+<span>Heartbeat emitted from zone: us-east-1a</span>
+</div>
+<div class="flex gap-4">
+<span class="opacity-50">14:21:57.92</span>
+<span class="text-secondary font-bold">[QUALITY]</span>
+<span>Table 'transactions' latency stable at 12ms</span>
+</div>
+<div class="flex gap-4 text-on-surface">
+<span class="text-primary opacity-50">14:21:56.55</span>
+<span class="text-primary font-bold">[ANOMALY]</span>
+<span>Detected deviation in query_execution_times (z-score: 3.4)</span>
+</div>
+</div>
+</div>
+<!-- Metric Pulse Cards -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-primary">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Total Mock Events</p>
+<p class="text-3xl font-headline font-bold text-on-surface mt-2" id="total-mock-events-value">1,482</p>
+<div class="w-full bg-surface-container-highest h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-primary w-[75%] h-full"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-secondary">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Current Bandwidth</p>
+<p class="text-3xl font-headline font-bold text-on-surface mt-2" id="current-bandwidth-value">12.4 <span class="text-sm text-on-surface-variant font-normal">MB/s</span></p>
+<div class="w-full bg-surface-container-highest h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-secondary w-[40%] h-full"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Background Decoration -->
+<div class="fixed bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10 translate-x-1/2 translate-y-1/2"></div>
+<div class="fixed top-20 left-64 w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] -z-10"></div>
+</main>
+<script>
+  (function () {
+    const OVERVIEW_URL = 'http://localhost:4001/api/metrics/overview';
+    const WS_URL = 'ws://localhost:4000';
+
+    const outputEl = document.getElementById('mock-live-output');
+    const totalEventsEl = document.getElementById('total-mock-events-value');
+    const bandwidthEl = document.getElementById('current-bandwidth-value');
+    const feedIdEl = document.getElementById('feed-id-value');
+    const runBtn = document.getElementById('run-simulation-btn');
+    const resetBtn = document.getElementById('reset-all-btn');
+
+    let wsEventCount = 0;
+
+    function addOutput(type, message, colorClass) {
+      if (!outputEl) return;
+
+      const row = document.createElement('div');
+      row.className = 'flex gap-4';
+
+      const ts = document.createElement('span');
+      ts.className = 'opacity-50';
+      ts.textContent = new Date().toLocaleTimeString();
+
+      const level = document.createElement('span');
+      level.className = (colorClass || 'text-primary') + ' font-bold';
+      level.textContent = '[' + type + ']';
+
+      const text = document.createElement('span');
+      text.textContent = message;
+
+      row.appendChild(ts);
+      row.appendChild(level);
+      row.appendChild(text);
+      outputEl.prepend(row);
+
+      while (outputEl.children.length > 40) {
+        outputEl.removeChild(outputEl.lastChild);
+      }
+    }
+
+    function setSyntheticBandwidth(volume) {
+      if (!bandwidthEl) return;
+      const mbPerSec = Math.max(0.1, Number(volume || 0) / 50000);
+      bandwidthEl.innerHTML = mbPerSec.toFixed(1) + ' <span class="text-sm text-on-surface-variant font-normal">MB/s</span>';
+    }
+
+    async function refreshOverview() {
+      try {
+        const response = await fetch(OVERVIEW_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Overview request failed');
+        const overview = await response.json();
+
+        if (totalEventsEl && typeof overview.totalEvents === 'number') {
+          totalEventsEl.textContent = overview.totalEvents.toLocaleString();
+        }
+
+        setSyntheticBandwidth(overview.totalEvents);
+      } catch (_err) {
+        addOutput('WARN', 'Overview endpoint unavailable; showing fallback metrics', 'text-tertiary');
+      }
+    }
+
+    function connectWebSocket() {
+      try {
+        const ws = new WebSocket(WS_URL);
+
+        ws.onopen = function () {
+          if (feedIdEl) {
+            feedIdEl.textContent = 'SONAR_FEED_ID: ws://localhost:4000';
+          }
+          addOutput('INFO', 'Connected to real-time feed', 'text-primary');
+        };
+
+        ws.onmessage = function (event) {
+          wsEventCount += 1;
+          try {
+            const data = JSON.parse(event.data);
+            const type = String(data.type || 'UPDATE').toUpperCase();
+            const payload = data.payload || {};
+            const message = payload.message || payload.anomalyType || payload.sourceId || 'Realtime update received';
+            const color = type.includes('ALERT') ? 'text-tertiary' : (type.includes('QUALITY') ? 'text-secondary' : 'text-primary');
+
+            addOutput(type, message, color);
+
+            if (totalEventsEl) {
+              const current = Number(String(totalEventsEl.textContent || '0').replace(/,/g, ''));
+              if (!Number.isNaN(current)) {
+                totalEventsEl.textContent = (current + 1).toLocaleString();
+              }
+            }
+            setSyntheticBandwidth(wsEventCount * 1200);
+          } catch (_err) {
+            addOutput('WARN', 'Received non-JSON websocket frame', 'text-tertiary');
+          }
+        };
+
+        ws.onerror = function () {
+          addOutput('ERROR', 'WebSocket error', 'text-error');
+        };
+
+        ws.onclose = function () {
+          addOutput('WARN', 'WebSocket disconnected; retrying', 'text-tertiary');
+          setTimeout(connectWebSocket, 3000);
+        };
+      } catch (_err) {
+        addOutput('ERROR', 'Unable to initialize websocket', 'text-error');
+      }
+    }
+
+    if (runBtn) {
+      runBtn.addEventListener('click', function () {
+        addOutput('INFO', 'Simulation trigger requested (UI-only control in this Stitch page)', 'text-primary');
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        wsEventCount = 0;
+        addOutput('SUCCESS', 'Local mock counters reset', 'text-secondary');
+        refreshOverview();
+      });
+    }
+
+    refreshOverview();
+    setInterval(refreshOverview, 20000);
+    connectWebSocket();
+  })();
+</script>
+</body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-container": "#100001",
+            "on-tertiary": "#490010",
+            "error-dim": "#d7383b",
+            "outline": "#767577",
+            "secondary-container": "#006c49",
+            "error": "#ff716c",
+            "on-error": "#490006",
+            "inverse-on-surface": "#565457",
+            "surface-bright": "#2c2c2f",
+            "primary-dim": "#699cff",
+            "surface-container-low": "#131315",
+            "on-primary": "#002c66",
+            "outline-variant": "#48474a",
+            "on-error-container": "#ffa8a3",
+            "tertiary-dim": "#ff6f7e",
+            "on-surface": "#f9f5f8",
+            "secondary": "#69f6b8",
+            "secondary-fixed-dim": "#58e7ab",
+            "secondary-dim": "#58e7ab",
+            "on-tertiary-fixed-variant": "#780021",
+            "surface-container-lowest": "#000000",
+            "on-secondary": "#005a3c",
+            "inverse-surface": "#fcf8fb",
+            "surface-variant": "#262528",
+            "tertiary": "#ff6f7e",
+            "on-primary-fixed-variant": "#002a62",
+            "on-secondary-fixed-variant": "#006544",
+            "primary-container": "#6e9fff",
+            "on-tertiary-fixed": "#39000b",
+            "surface-container-highest": "#262528",
+            "primary-fixed": "#6e9fff",
+            "tertiary-fixed": "#ff9099",
+            "on-background": "#f9f5f8",
+            "inverse-primary": "#005bc4",
+            "surface-dim": "#0e0e10",
+            "surface": "#0e0e10",
+            "primary-fixed-dim": "#5391ff",
+            "surface-tint": "#85adff",
+            "error-container": "#9f0519",
+            "secondary-fixed": "#69f6b8",
+            "on-secondary-fixed": "#00452d",
+            "on-secondary-container": "#e1ffec",
+            "primary": "#85adff",
+            "on-primary-container": "#002150",
+            "surface-container-high": "#1f1f22",
+            "tertiary-container": "#fc4563",
+            "background": "#0e0e10",
+            "surface-container": "#19191c",
+            "on-surface-variant": "#adaaad",
+            "on-primary-fixed": "#000000",
+            "tertiary-fixed-dim": "#ff7986"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+    }
+    body {
+      background-color: #0e0e10;
+      color: #f9f5f8;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="font-body antialiased selection:bg-primary/30 selection:text-primary">
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-[#0e0e10] border-r border-[#48474a]/15 font-inter antialiased text-sm tracking-tight z-50">
+<div class="flex flex-col h-full p-4 gap-2">
+<div class="px-2 py-4 mb-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-primary-dim flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-lg" data-icon="sensors" style="font-variation-settings: 'FILL' 1;">sensors</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tighter text-[#f9f5f8]">DataSonar</span>
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant leading-none">Observability</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Pipelines</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#85adff] bg-[#19191c] font-semibold rounded-md active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="notifications_active" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span>Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/10 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#adaaad] hover:text-[#f9f5f8] hover:bg-[#131315] transition-colors duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-[#131315]/70 backdrop-blur-xl border-b border-[#48474a]/15 shadow-sm">
+<div class="flex justify-between items-center px-8 w-full h-full font-inter text-sm font-medium">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest py-2 pl-10 pr-4 rounded-md border-none focus:ring-1 focus:ring-primary/30 text-on-surface placeholder:text-on-surface-variant transition-all outline-none" placeholder="Search logs, alerts, pipelines..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<a class="text-[#85adff] border-b-2 border-[#85adff] pb-1 transition-opacity" href="#">Prod-Cluster-01</a>
+<a class="text-[#adaaad] hover:text-[#f9f5f8] transition-opacity" href="#">Staging</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#adaaad] hover:text-[#f9f5f8] transition-colors">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+</button>
+<button class="p-2 text-[#adaaad] hover:text-[#f9f5f8] transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-[#adaaad] hover:text-[#f9f5f8] transition-colors">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container overflow-hidden ml-2 border border-outline-variant/30">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB55UsOwQMP0rsJxrOXJSawnbiHJ5via7J3Z3cSbXTva5JRyB_rjNWDCbPjk6oXWcvhPbk0kspNslQNDawdKsvmt7s4bD7dbwVNEJev8v1SQxLCXGwgN9bB0ohdNFy_WXgidCRGAgbM6AJZRESlkx3dS3PLBYHWFOoZtW_hdBrf6v9NDQvHP5bM1tkS2tm1eZvmYJit2lSDc6CY6UGhXKguCrK6OFN-VjAzZ2qUSJHrCSPYRhQnWCPT8SAETL6WAwdIP0wg_73RO6Cj"/>
+</div>
+</div>
+</div>
+</header>
+<main class="ml-64 pt-16 min-h-screen bg-surface">
+<div class="max-w-7xl mx-auto p-8">
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h1 class="text-3xl font-bold tracking-tight text-on-surface">Alerts Center</h1>
+<div class="flex items-center gap-2 px-2 py-1 rounded-full bg-surface-container-high border border-outline-variant/20">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-secondary">Live</span>
+</div>
+</div>
+<p class="text-on-surface-variant max-w-xl">Real-time health monitoring and anomaly detection across your globally distributed pipeline architecture.</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg border border-outline-variant/10">
+<span class="px-3 text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Severity</span>
+<div class="flex gap-1">
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-error/10 text-error border border-error/20 hover:bg-error/20 transition-colors">High</button>
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">Medium</button>
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">Low</button>
+</div>
+</div>
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg border border-outline-variant/10">
+<span class="px-3 text-[11px] font-bold uppercase text-on-surface-variant tracking-wider">Status</span>
+<div class="flex gap-1">
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-primary/10 text-primary border border-primary/20">Unresolved</button>
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">Resolved</button>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high text-on-surface rounded-md border border-outline-variant/20 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+<span class="text-xs font-semibold uppercase tracking-wider">More Filters</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-low rounded-xl border-l-[3px] border-error group relative overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex gap-4">
+<div class="mt-1 flex-shrink-0">
+<div class="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center text-error border border-error/20">
+<span class="material-symbols-outlined" data-icon="error" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] font-bold uppercase tracking-[0.15em] text-error">High Severity</span>
+<span class="text-[10px] text-on-surface-variant font-mono">2024-05-20 14:22:31 UTC</span>
+</div>
+<h3 class="text-lg font-semibold text-on-surface leading-snug">Schema mismatch detected in Pipeline-A</h3>
+<p class="text-sm text-on-surface-variant mt-1">Found 43 unexpected fields in the ingestion layer. Automatic mapping failed for 'user_metadata_v2' cluster.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-md bg-surface-container-highest text-on-surface text-xs font-bold uppercase tracking-wider hover:bg-surface-variant transition-all active:scale-95">Acknowledge</button>
+<button class="px-4 py-2 rounded-md bg-surface-container-highest text-on-surface text-xs font-bold uppercase tracking-wider hover:bg-surface-variant transition-all active:scale-95">Resolve</button>
+<button class="px-4 py-2 rounded-md bg-primary text-on-primary text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+                View Pipeline <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-error/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+</div>
+<div class="bg-surface-container-low rounded-xl border-l-[3px] border-tertiary group relative overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex gap-4">
+<div class="mt-1 flex-shrink-0">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] font-bold uppercase tracking-[0.15em] text-tertiary">Medium Severity</span>
+<span class="text-[10px] text-on-surface-variant font-mono">2024-05-20 14:15:04 UTC</span>
+</div>
+<h3 class="text-lg font-semibold text-on-surface leading-snug">High Latency in US-East-1 Ingestion</h3>
+<p class="text-sm text-on-surface-variant mt-1">Average response time spiked to 1.2s (Threshold: 400ms). Load balancer reporting 5% retry rate.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-md bg-surface-container-highest text-on-surface text-xs font-bold uppercase tracking-wider hover:bg-surface-variant transition-all active:scale-95">Acknowledge</button>
+<button class="px-4 py-2 rounded-md bg-surface-container-highest text-on-surface text-xs font-bold uppercase tracking-wider hover:bg-surface-variant transition-all active:scale-95">Resolve</button>
+<button class="px-4 py-2 rounded-md bg-primary text-on-primary text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+                View Pipeline <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+</div>
+<div class="bg-surface-container-low rounded-xl border-l-[3px] border-primary group relative overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex gap-4">
+<div class="mt-1 flex-shrink-0">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] font-bold uppercase tracking-[0.15em] text-primary">Low Severity</span>
+<span class="text-[10px] text-on-surface-variant font-mono">2024-05-20 13:58:12 UTC</span>
+</div>
+<h3 class="text-lg font-semibold text-on-surface leading-snug">Pipeline-C: Minor Throughput Drop</h3>
+<p class="text-sm text-on-surface-variant mt-1">Throughput decreased by 12%. No impact on downstream consumers noted yet.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-md bg-surface-container-highest text-on-surface text-xs font-bold uppercase tracking-wider hover:bg-surface-variant transition-all active:scale-95">Acknowledge</button>
+<button class="px-4 py-2 rounded-md bg-surface-container-highest text-on-surface text-xs font-bold uppercase tracking-wider hover:bg-surface-variant transition-all active:scale-95">Resolve</button>
+<button class="px-4 py-2 rounded-md bg-primary text-on-primary text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+                View Pipeline <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low/40 rounded-xl border-l-[3px] border-outline-variant opacity-60">
+<div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex gap-4">
+<div class="mt-1 flex-shrink-0">
+<div class="w-10 h-10 rounded-lg bg-outline-variant/10 flex items-center justify-center text-on-surface-variant border border-outline-variant/20">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant">Resolved</span>
+<span class="text-[10px] text-on-surface-variant/60 font-mono">2024-05-20 11:02:45 UTC</span>
+</div>
+<h3 class="text-lg font-semibold text-on-surface-variant leading-snug line-through decoration-1">Memory Pressure on Redis Cluster 04</h3>
+<p class="text-sm text-on-surface-variant/60 mt-1">Auto-scaling group triggered. 2 new nodes added to pool. Resolved by System.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-md bg-surface-container text-on-surface-variant text-xs font-bold uppercase tracking-wider cursor-not-allowed">Archived</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/10 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Alert Volume (24h)</span>
+<span class="material-symbols-outlined text-primary" data-icon="monitoring">monitoring</span>
+</div>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-4xl font-bold tracking-tight text-on-surface">142</span>
+<span class="text-secondary text-sm font-medium">+12%</span>
+</div>
+<div class="h-16 w-full flex items-end gap-1">
+<div class="w-full bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="w-full bg-primary/20 h-[45%] rounded-t-sm"></div>
+<div class="w-full bg-primary/20 h-[60%] rounded-t-sm"></div>
+<div class="w-full bg-primary/20 h-[55%] rounded-t-sm"></div>
+<div class="w-full bg-primary/20 h-[80%] rounded-t-sm"></div>
+<div class="w-full bg-primary h-full rounded-t-sm shadow-[0_0_15px_rgba(133,173,255,0.4)]"></div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Mean Time to Resolution</span>
+<span class="material-symbols-outlined text-secondary" data-icon="timer">timer</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-4xl font-bold tracking-tight text-on-surface">14.2m</span>
+<span class="text-secondary text-sm font-medium">-4.5m</span>
+</div>
+<p class="text-xs text-on-surface-variant">Performing better than last week average (18.7m).</p>
+</div>
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Critical Incidents</span>
+<span class="material-symbols-outlined text-error" data-icon="report">report</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-4xl font-bold tracking-tight text-on-surface">3</span>
+<span class="text-error text-sm font-medium">Attention</span>
+</div>
+<div class="flex -space-x-2">
+<img alt="On-call user" class="w-7 h-7 rounded-full border-2 border-surface-container" data-alt="close up headshot of a professional data engineer with short dark hair in a tech office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUncizo977zGyFKGkaT_5YjN0-eeLLOIiTTbf5njGYdCDBT6N7-vbTrPMdZ03xG4BsL0SxjIInl2ZC_y9a-FNlV0kjdhbGQIZ7lqpxeFnwG-VcDKzIudnApkEWTKObD_glY3jioGJaj6ujNy6s4FHswvdbkg_Akk2CLObnxJNX4KGvCp2iw4cFDIgCsGLNQzuEqS5s0gXK1aJEz07kzktr54U2R4M42miqA_kPdEh2ykPSmR9YfmZZQgXSJVZ49c3UeHAikU2SYT0Q"/>
+<img alt="On-call user" class="w-7 h-7 rounded-full border-2 border-surface-container" data-alt="close up headshot of a smiling female systems analyst with glasses in professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVY5xVnrkKmfbLMhwwTV5ITgI2oyJT_bGNtmxd_p6N2QIB09p_mjdO8tOKiJyIyzJm9mi1GjZ6ImCFXBOoL8hNW6di8lJVW7IVP0EoLujjqboI9c1SBk18RN6kAEZ_3LuOCiFPU2n3wRoMGqsmbqb_lqHXFyGGhT1UZUZV7-gEDuLTwIzW_PIvTrn4M1Q8OaN4vGhJt0cbvIIqaPhd9WhUnYdRmwAb_Pxoia_BovY_bnMYEfHhDoOr0Y0nmu-J284Y9WS1J-7dntpv"/>
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border-2 border-surface-container flex items-center justify-center text-[8px] font-bold">+2</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<button class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-dim text-on-primary shadow-xl shadow-primary/20 flex items-center justify-center active:scale-95 transition-all z-50 group">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+<span class="absolute right-full mr-4 px-3 py-1.5 bg-surface-container-high border border-outline-variant/20 rounded-md text-xs font-bold uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">New Alert Rule</span>
+</button>
+</body></html>
