@@ -5,6 +5,7 @@ import { logger } from './utils/logger';
 import { KafkaProducerService } from './producers/kafka.producer';
 import { createIngestionRoutes } from './routes/ingestion.routes';
 import { IngestionController } from './controllers/ingestion.controller';
+import { DemoTelemetryService } from './services/demoTelemetry.service';
 
 async function main(): Promise<void> {
   const app = express();
@@ -25,6 +26,7 @@ async function main(): Promise<void> {
 
   // Initialize Kafka producer
   const kafkaProducer = new KafkaProducerService();
+  const telemetry = new DemoTelemetryService();
 
   try {
     await kafkaProducer.connect();
@@ -34,12 +36,14 @@ async function main(): Promise<void> {
     await kafkaProducer.connect();
   }
 
+  await telemetry.connect();
+
   // Health check
-  const controller = new IngestionController(kafkaProducer);
+  const controller = new IngestionController(kafkaProducer, telemetry);
   app.get('/health', controller.healthCheck);
 
   // API routes
-  app.use('/api/v1', createIngestionRoutes(kafkaProducer));
+  app.use('/api/v1', createIngestionRoutes(kafkaProducer, telemetry));
 
   // 404 handler
   app.use((_req, res) => {
@@ -63,6 +67,7 @@ async function main(): Promise<void> {
   // Graceful shutdown
   const shutdown = async (signal: string) => {
     logger.info(`${signal} received. Shutting down gracefully...`);
+    await telemetry.disconnect();
     await kafkaProducer.disconnect();
     process.exit(0);
   };

@@ -22,4 +22,13 @@ export const config = {
   logging: {
     level: process.env.LOG_LEVEL || 'info',
   },
+  telemetry: {
+    enabled: ['1', 'true', 'yes', 'on'].includes(
+      String(process.env.INGESTION_TELEMETRY_ENABLED || 'true').toLowerCase()
+    ),
+    mongoUri:
+      process.env.INGESTION_TELEMETRY_MONGODB_URI ||
+      'mongodb://datasonar:datasonar_secret@localhost:27018/datasonar?authSource=admin',
+    mongoDbName: process.env.INGESTION_TELEMETRY_MONGODB_DB_NAME || 'datasonar',
+  },
 } as const;

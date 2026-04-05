@@ -45,15 +45,20 @@ cd frontend
 npm run dev
 ```
 
-## Open Monitoring Tabs
+## Open Required Monitoring Tabs
 
-Open these in your browser:
+Open only this in your browser:
 
 1. `http://localhost:8090` -> Kafka UI, navigate to topic `datasonar.raw-events`
 2. `http://localhost:8090` -> Kafka UI, navigate to topic `datasonar.dead-letter`
-3. `http://localhost:3000/demo.html` -> interactive "Break My Pipeline" page
-4. `http://localhost:3000/stitch_assets/api-health-status.html` -> API Health Status Screen UI
-5. `http://localhost:3000/stitch_assets/mock-data-controls.html` -> Mock Data Controls Screen UI
+
+## Optional UI Pages
+
+These are optional visualization pages and are not required for validating Kafka flow:
+
+1. `http://localhost:3000/demo.html` -> interactive "Break My Pipeline" page
+2. `http://localhost:3000/stitch_assets/api-health-status.html` -> API Health Status Screen UI
+3. `http://localhost:3000/stitch_assets/mock-data-controls.html` -> Mock Data Controls Screen UI
 
 ## Recommended Screen Layout
 
@@ -83,7 +88,7 @@ Controls:
 4. Press Space in terminal to enable attack mode.
 5. Watch responses switch to `400 Bad Request` with validation errors.
 6. Verify malformed events appear in `datasonar.dead-letter`.
-7. Use `http://localhost:3000/demo.html` to manually edit payloads and submit custom bad JSON.
+7. (Optional) Use `http://localhost:3000/demo.html` to manually edit payloads and submit custom bad JSON.
 
 ## Troubleshooting
 

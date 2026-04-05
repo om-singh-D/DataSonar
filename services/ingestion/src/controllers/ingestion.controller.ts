@@ -1,12 +1,16 @@
 import { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import { PipelineEventSchema } from '../schemas/event.schema';
 import { KafkaProducerService } from '../producers/kafka.producer';
 import { logger } from '../utils/logger';
 import { config } from '../config';
+import { DemoTelemetryService, ValidationIssue } from '../services/demoTelemetry.service';
 
 export class IngestionController {
-  constructor(private kafkaProducer: KafkaProducerService) {}
+  constructor(
+    private kafkaProducer: KafkaProducerService,
+    private telemetry: DemoTelemetryService
+  ) {}
 
   /**
    * POST /api/v1/ingest
@@ -20,7 +24,7 @@ export class IngestionController {
       const validationResult = PipelineEventSchema.safeParse(req.body);
 
       if (!validationResult.success) {
-        const errors = validationResult.error.issues.map((issue) => ({
+        const errors: ValidationIssue[] = validationResult.error.issues.map((issue) => ({
           field: issue.path.join('.'),
           message: issue.message,
         }));
@@ -36,6 +40,7 @@ export class IngestionController {
           JSON.stringify(errors),
           req.ip
         );
+        await this.telemetry.recordRejectedEvent(req.body, errors, req.ip);
 
         res.status(400).json({
           status: 'error',
@@ -48,7 +53,7 @@ export class IngestionController {
       // 2. Enrich the event
       const enrichedEvent = {
         ...validationResult.data,
-        eventId: uuidv4(),
+        eventId: randomUUID(),
         receivedAt: new Date().toISOString(),
         ingestionService: config.service.name,
         validationStatus: 'valid' as const,
@@ -56,6 +61,7 @@ export class IngestionController {
 
       // 3. Send to Kafka
       await this.kafkaProducer.sendEvent(enrichedEvent);
+      await this.telemetry.recordAcceptedEvent(enrichedEvent);
 
       const processingTime = Date.now() - startTime;
 
@@ -118,12 +124,14 @@ export class IngestionController {
         const validationResult = PipelineEventSchema.safeParse(events[i]);
 
         if (!validationResult.success) {
+          const errors: ValidationIssue[] = validationResult.error.issues.map((issue) => ({
+            field: issue.path.join('.'),
+            message: issue.message,
+          }));
+
           results.rejected.push({
             index: i,
-            errors: validationResult.error.issues.map((issue) => ({
-              field: issue.path.join('.'),
-              message: issue.message,
-            })),
+            errors,
           });
 
           await this.kafkaProducer.sendToDeadLetter(
@@ -131,18 +139,20 @@ export class IngestionController {
             `Batch item ${i} validation failed`,
             req.ip
           );
+          await this.telemetry.recordRejectedEvent(events[i], errors, req.ip);
           continue;
         }
 
         const enrichedEvent = {
           ...validationResult.data,
-          eventId: uuidv4(),
+          eventId: randomUUID(),
           receivedAt: new Date().toISOString(),
           ingestionService: config.service.name,
           validationStatus: 'valid' as const,
         };
 
         await this.kafkaProducer.sendEvent(enrichedEvent);
+        await this.telemetry.recordAcceptedEvent(enrichedEvent);
         results.accepted.push(enrichedEvent.eventId);
       }
 
