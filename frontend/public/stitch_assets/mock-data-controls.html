@@ -101,22 +101,22 @@
 <p class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] mt-1">Observability Engine</p>
 </div>
 <nav class="space-y-1">
-<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg" href="/stitch_assets/api-health-status.html">
 <span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
 <span class="text-sm">Health Status</span>
-</div>
-<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg" href="/demo.html">
 <span class="material-symbols-outlined" data-icon="database">database</span>
 <span class="text-sm">Activity Logs</span>
-</div>
-<div class="flex items-center gap-3 px-4 py-2 text-[#f9f5f8] bg-surface-container border-l-2 border-primary font-semibold cursor-pointer rounded-r-lg">
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#f9f5f8] bg-surface-container border-l-2 border-primary font-semibold cursor-pointer rounded-r-lg" href="/stitch_assets/mock-data-controls.html">
 <span class="material-symbols-outlined" data-icon="science" style="font-variation-settings: 'FILL' 1;">science</span>
 <span class="text-sm">Mock Controls</span>
-</div>
-<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg" href="/stitch_assets/api-health-status.html">
 <span class="material-symbols-outlined" data-icon="tune">tune</span>
 <span class="text-sm">API Settings</span>
-</div>
+</a>
 </nav>
 <div class="mt-auto pt-8 space-y-1">
 <div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-on-surface hover:bg-surface-container transition-all duration-200 cursor-pointer rounded-lg">
@@ -171,7 +171,7 @@
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
-<input checked="" class="sr-only peer" type="checkbox"/>
+<input checked="" class="sr-only peer" id="anomaly-enabled" type="checkbox"/>
 <div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
 </label>
 </div>
@@ -179,16 +179,16 @@
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Frequency</span>
-<span class="text-primary">12/min</span>
+<span class="text-primary" id="anomaly-frequency-label">12/min</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" id="anomaly-frequency" max="60" min="1" type="range" value="12"/>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Severity Level</span>
-<span class="text-primary">High</span>
+<span class="text-primary" id="anomaly-severity-label">High</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range" value="80"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" id="anomaly-severity" max="100" min="1" type="range" value="80"/>
 </div>
 </div>
 </div>
@@ -205,7 +205,7 @@
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
-<input class="sr-only peer" type="checkbox"/>
+<input class="sr-only peer" id="alert-enabled" type="checkbox"/>
 <div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-tertiary"></div>
 </label>
 </div>
@@ -213,16 +213,16 @@
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Burst Rate</span>
-<span class="text-tertiary">Low</span>
+<span class="text-tertiary" id="alert-burst-label">Low</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" type="range" value="20"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" id="alert-burst" max="100" min="0" type="range" value="20"/>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Criticality</span>
-<span class="text-tertiary">Medium</span>
+<span class="text-tertiary" id="alert-criticality-label">Medium</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" type="range" value="50"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" id="alert-criticality" max="100" min="0" type="range" value="50"/>
 </div>
 </div>
 </div>
@@ -239,7 +239,7 @@
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
-<input checked="" class="sr-only peer" type="checkbox"/>
+<input checked="" class="sr-only peer" id="quality-enabled" type="checkbox"/>
 <div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
 </label>
 </div>
@@ -247,16 +247,16 @@
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Update Interval</span>
-<span class="text-secondary">0.5s</span>
+<span class="text-secondary" id="quality-interval-label">0.5s</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" type="range" value="90"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" id="quality-interval" max="100" min="10" type="range" value="90"/>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Drift Sensitivity</span>
-<span class="text-secondary">Minimal</span>
+<span class="text-secondary" id="quality-drift-label">Minimal</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" type="range" value="15"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" id="quality-drift" max="100" min="0" type="range" value="15"/>
 </div>
 </div>
 </div>
@@ -273,24 +273,24 @@
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
-<input class="sr-only peer" type="checkbox"/>
+<input class="sr-only peer" id="latency-enabled" type="checkbox"/>
 <div class="w-10 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-outline"></div>
 </label>
 </div>
-<div class="space-y-4 pt-2 opacity-50">
+<div class="space-y-4 pt-2 opacity-50" id="latency-controls-container">
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Delay (ms)</span>
-<span>0ms</span>
+<span id="latency-delay-label">0ms</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-not-allowed" disabled="" type="range"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-not-allowed" disabled="" id="latency-delay" max="1500" min="0" type="range" value="0"/>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">
 <span>Jitter</span>
-<span>None</span>
+<span id="latency-jitter-label">None</span>
 </div>
-<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-not-allowed" disabled="" type="range"/>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-not-allowed" disabled="" id="latency-jitter" max="500" min="0" type="range" value="0"/>
 </div>
 </div>
 </div>
@@ -305,7 +305,7 @@
 <button class="px-6 py-2 bg-surface-container-highest text-on-surface font-semibold text-sm rounded-md hover:bg-surface-variant transition-colors" id="reset-all-btn">Reset All</button>
 <button class="px-6 py-2 bg-gradient-to-br from-primary to-primary-dim text-on-primary font-bold text-sm rounded-md shadow-lg shadow-primary/20 flex items-center gap-2" id="run-simulation-btn">
 <span class="material-symbols-outlined text-lg" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-              Run Simulation
+              <span id="run-simulation-label">Run Simulation</span>
             </button>
 </div>
 </div>
@@ -380,6 +380,16 @@
 <div class="bg-secondary w-[40%] h-full"></div>
 </div>
 </div>
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-tertiary">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Projected Rate</p>
+<p class="text-3xl font-headline font-bold text-on-surface mt-2" id="projected-rate-value">0/min</p>
+<p class="text-xs text-on-surface-variant mt-3">Derived from active generators and interval sliders</p>
+</div>
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-outline-variant">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Projected Reject Ratio</p>
+<p class="text-3xl font-headline font-bold text-on-surface mt-2" id="projected-reject-ratio-value">0.0%</p>
+<p class="text-xs text-on-surface-variant mt-3">Estimated 400 response share from anomaly/alert settings</p>
+</div>
 </div>
 </section>
 </div>
@@ -389,17 +399,346 @@
 </main>
 <script>
   (function () {
+    const INGEST_URL = 'http://localhost:3001/api/v1/ingest';
     const OVERVIEW_URL = 'http://localhost:4001/api/metrics/overview';
     const WS_URL = 'ws://localhost:4000';
+    const MAX_OUTPUT_ROWS = 50;
+    const SETTINGS_STORAGE_KEY = 'datasonar.mock-controls.settings.v1';
+
+    const DEFAULT_SETTINGS = {
+      anomalyEnabled: true,
+      anomalyFrequency: 12,
+      anomalySeverity: 80,
+      alertEnabled: false,
+      alertBurst: 20,
+      alertCriticality: 50,
+      qualityEnabled: true,
+      qualityInterval: 90,
+      qualityDrift: 15,
+      latencyEnabled: false,
+      latencyDelay: 0,
+      latencyJitter: 0
+    };
+
+    const sourceCatalog = [
+      {
+        sourceId: 'stripe-checkout-prod-us',
+        sourceName: 'Stripe Checkout Prod US',
+        sourceType: 'api',
+        pipeline: 'payments-prod'
+      },
+      {
+        sourceId: 'salesforce-leads-prod-us',
+        sourceName: 'Salesforce Leads Prod US',
+        sourceType: 'api',
+        pipeline: 'crm-prod'
+      },
+      {
+        sourceId: 'shopify-orders-prod-us',
+        sourceName: 'Shopify Orders Prod US',
+        sourceType: 'api',
+        pipeline: 'orders-prod'
+      },
+      {
+        sourceId: 'warehouse-inventory-stream-us',
+        sourceName: 'Warehouse Inventory Stream US',
+        sourceType: 'stream',
+        pipeline: 'inventory-prod'
+      },
+      {
+        sourceId: 'postgres-analytics-prod-us',
+        sourceName: 'Postgres Analytics Prod US',
+        sourceType: 'database',
+        pipeline: 'analytics-prod'
+      }
+    ];
 
     const outputEl = document.getElementById('mock-live-output');
     const totalEventsEl = document.getElementById('total-mock-events-value');
     const bandwidthEl = document.getElementById('current-bandwidth-value');
+    const projectedRateEl = document.getElementById('projected-rate-value');
+    const projectedRejectRatioEl = document.getElementById('projected-reject-ratio-value');
     const feedIdEl = document.getElementById('feed-id-value');
     const runBtn = document.getElementById('run-simulation-btn');
+    const runBtnLabel = document.getElementById('run-simulation-label');
+    const runBtnIcon = runBtn ? runBtn.querySelector('.material-symbols-outlined') : null;
     const resetBtn = document.getElementById('reset-all-btn');
 
+    const controls = {
+      anomalyEnabled: document.getElementById('anomaly-enabled'),
+      anomalyFrequency: document.getElementById('anomaly-frequency'),
+      anomalySeverity: document.getElementById('anomaly-severity'),
+      alertEnabled: document.getElementById('alert-enabled'),
+      alertBurst: document.getElementById('alert-burst'),
+      alertCriticality: document.getElementById('alert-criticality'),
+      qualityEnabled: document.getElementById('quality-enabled'),
+      qualityInterval: document.getElementById('quality-interval'),
+      qualityDrift: document.getElementById('quality-drift'),
+      latencyEnabled: document.getElementById('latency-enabled'),
+      latencyDelay: document.getElementById('latency-delay'),
+      latencyJitter: document.getElementById('latency-jitter')
+    };
+
+    const labels = {
+      anomalyFrequency: document.getElementById('anomaly-frequency-label'),
+      anomalySeverity: document.getElementById('anomaly-severity-label'),
+      alertBurst: document.getElementById('alert-burst-label'),
+      alertCriticality: document.getElementById('alert-criticality-label'),
+      qualityInterval: document.getElementById('quality-interval-label'),
+      qualityDrift: document.getElementById('quality-drift-label'),
+      latencyDelay: document.getElementById('latency-delay-label'),
+      latencyJitter: document.getElementById('latency-jitter-label')
+    };
+
+    const latencyControlsContainer = document.getElementById('latency-controls-container');
+
     let wsEventCount = 0;
+    let simulationTimerId = null;
+    let simulationRunning = false;
+    let simulationTickInFlight = false;
+    let localSimulationEvents = 0;
+    let localRejectedEvents = 0;
+    let simulationStartedAt = 0;
+    let requestSequence = 0;
+
+    function readNumber(text, fallback) {
+      const parsed = Number(String(text || '').replace(/,/g, '').replace(/[^0-9.-]/g, ''));
+      return Number.isFinite(parsed) ? parsed : fallback;
+    }
+
+    function getControlNumber(control, fallback) {
+      if (!control) return fallback;
+      const parsed = Number(control.value);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    }
+
+    function clamp(value, min, max) {
+      if (!Number.isFinite(value)) return min;
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function randomChoice(items) {
+      if (!Array.isArray(items) || items.length === 0) return null;
+      return items[randomInt(0, items.length - 1)];
+    }
+
+    function qualityIntervalSeconds() {
+      const value = getControlNumber(controls.qualityInterval, 90);
+      const computed = (110 - value) / 40;
+      return Math.max(0.25, Math.min(2.5, Number(computed.toFixed(2))));
+    }
+
+    function anomalySeverityText(value) {
+      if (value >= 90) return 'Critical';
+      if (value >= 60) return 'High';
+      if (value >= 30) return 'Medium';
+      return 'Low';
+    }
+
+    function burstText(value) {
+      if (value >= 70) return 'High';
+      if (value >= 35) return 'Medium';
+      return 'Low';
+    }
+
+    function criticalityText(value) {
+      if (value >= 85) return 'Critical';
+      if (value >= 65) return 'High';
+      if (value >= 35) return 'Medium';
+      return 'Low';
+    }
+
+    function driftText(value) {
+      if (value >= 75) return 'Aggressive';
+      if (value >= 45) return 'Moderate';
+      if (value >= 20) return 'Low';
+      return 'Minimal';
+    }
+
+    function jitterText(value) {
+      if (value <= 0) return 'None';
+      if (value <= 100) return 'Low';
+      if (value <= 250) return 'Medium';
+      return 'High';
+    }
+
+    function calculateTargetEventsPerMinute() {
+      const qualityEnabled = Boolean(controls.qualityEnabled && controls.qualityEnabled.checked);
+      const anomalyEnabled = Boolean(controls.anomalyEnabled && controls.anomalyEnabled.checked);
+      const alertEnabled = Boolean(controls.alertEnabled && controls.alertEnabled.checked);
+      const anomalyFrequency = getControlNumber(controls.anomalyFrequency, DEFAULT_SETTINGS.anomalyFrequency);
+      const alertBurst = getControlNumber(controls.alertBurst, DEFAULT_SETTINGS.alertBurst);
+
+      let targetEventsPerMinute = 0;
+
+      if (qualityEnabled) {
+        targetEventsPerMinute += Math.round(60 / qualityIntervalSeconds());
+      }
+      if (anomalyEnabled) {
+        targetEventsPerMinute += anomalyFrequency;
+      }
+      if (alertEnabled) {
+        targetEventsPerMinute += Math.max(1, Math.round(alertBurst / 2));
+      }
+
+      return Math.max(0, targetEventsPerMinute);
+    }
+
+    function calculateInvalidProbability() {
+      const anomalyEnabled = Boolean(controls.anomalyEnabled && controls.anomalyEnabled.checked);
+      const alertEnabled = Boolean(controls.alertEnabled && controls.alertEnabled.checked);
+
+      if (!anomalyEnabled && !alertEnabled) {
+        return 0;
+      }
+
+      const anomalyFrequency = getControlNumber(controls.anomalyFrequency, DEFAULT_SETTINGS.anomalyFrequency);
+      const anomalySeverity = getControlNumber(controls.anomalySeverity, DEFAULT_SETTINGS.anomalySeverity);
+      const alertBurst = getControlNumber(controls.alertBurst, DEFAULT_SETTINGS.alertBurst);
+      const alertCriticality = getControlNumber(controls.alertCriticality, DEFAULT_SETTINGS.alertCriticality);
+
+      let probability = 0.02;
+
+      if (anomalyEnabled) {
+        probability += Math.min(0.35, anomalyFrequency / 180);
+        probability += Math.min(0.3, anomalySeverity / 260);
+      }
+
+      if (alertEnabled) {
+        probability += Math.min(0.2, alertBurst / 500);
+        probability += Math.min(0.2, alertCriticality / 500);
+      }
+
+      if (!alertEnabled && anomalyEnabled) {
+        probability *= 0.8;
+      }
+
+      return Math.min(0.92, probability);
+    }
+
+    function updateProjectedMetrics() {
+      if (projectedRateEl) {
+        projectedRateEl.textContent = calculateTargetEventsPerMinute() + '/min';
+      }
+      if (projectedRejectRatioEl) {
+        const rejectRatio = (calculateInvalidProbability() * 100).toFixed(1);
+        projectedRejectRatioEl.textContent = rejectRatio + '%';
+      }
+    }
+
+    function getCurrentSettings() {
+      return {
+        anomalyEnabled: Boolean(controls.anomalyEnabled && controls.anomalyEnabled.checked),
+        anomalyFrequency: getControlNumber(controls.anomalyFrequency, DEFAULT_SETTINGS.anomalyFrequency),
+        anomalySeverity: getControlNumber(controls.anomalySeverity, DEFAULT_SETTINGS.anomalySeverity),
+        alertEnabled: Boolean(controls.alertEnabled && controls.alertEnabled.checked),
+        alertBurst: getControlNumber(controls.alertBurst, DEFAULT_SETTINGS.alertBurst),
+        alertCriticality: getControlNumber(controls.alertCriticality, DEFAULT_SETTINGS.alertCriticality),
+        qualityEnabled: Boolean(controls.qualityEnabled && controls.qualityEnabled.checked),
+        qualityInterval: getControlNumber(controls.qualityInterval, DEFAULT_SETTINGS.qualityInterval),
+        qualityDrift: getControlNumber(controls.qualityDrift, DEFAULT_SETTINGS.qualityDrift),
+        latencyEnabled: Boolean(controls.latencyEnabled && controls.latencyEnabled.checked),
+        latencyDelay: getControlNumber(controls.latencyDelay, DEFAULT_SETTINGS.latencyDelay),
+        latencyJitter: getControlNumber(controls.latencyJitter, DEFAULT_SETTINGS.latencyJitter)
+      };
+    }
+
+    function persistSettings() {
+      try {
+        window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(getCurrentSettings()));
+      } catch (_err) {
+        // Ignore storage errors (private mode, quota, disabled storage).
+      }
+    }
+
+    function applySettings(settings) {
+      const safe = Object.assign({}, DEFAULT_SETTINGS, settings || {});
+
+      if (controls.anomalyEnabled) controls.anomalyEnabled.checked = Boolean(safe.anomalyEnabled);
+      if (controls.anomalyFrequency) controls.anomalyFrequency.value = String(clamp(Number(safe.anomalyFrequency), 1, 60));
+      if (controls.anomalySeverity) controls.anomalySeverity.value = String(clamp(Number(safe.anomalySeverity), 1, 100));
+      if (controls.alertEnabled) controls.alertEnabled.checked = Boolean(safe.alertEnabled);
+      if (controls.alertBurst) controls.alertBurst.value = String(clamp(Number(safe.alertBurst), 0, 100));
+      if (controls.alertCriticality) controls.alertCriticality.value = String(clamp(Number(safe.alertCriticality), 0, 100));
+      if (controls.qualityEnabled) controls.qualityEnabled.checked = Boolean(safe.qualityEnabled);
+      if (controls.qualityInterval) controls.qualityInterval.value = String(clamp(Number(safe.qualityInterval), 10, 100));
+      if (controls.qualityDrift) controls.qualityDrift.value = String(clamp(Number(safe.qualityDrift), 0, 100));
+      if (controls.latencyEnabled) controls.latencyEnabled.checked = Boolean(safe.latencyEnabled);
+      if (controls.latencyDelay) controls.latencyDelay.value = String(clamp(Number(safe.latencyDelay), 0, 1500));
+      if (controls.latencyJitter) controls.latencyJitter.value = String(clamp(Number(safe.latencyJitter), 0, 500));
+
+      updateControlLabels();
+    }
+
+    function loadSavedSettings() {
+      try {
+        const raw = window.localStorage.getItem(SETTINGS_STORAGE_KEY);
+        if (!raw) {
+          applySettings(DEFAULT_SETTINGS);
+          persistSettings();
+          return;
+        }
+
+        const parsed = JSON.parse(raw);
+        applySettings(parsed);
+      } catch (_err) {
+        applySettings(DEFAULT_SETTINGS);
+        persistSettings();
+      }
+    }
+
+    function updateRunButtonState() {
+      if (runBtnLabel) {
+        runBtnLabel.textContent = simulationRunning ? 'Stop Simulation' : 'Run Simulation';
+      }
+      if (runBtnIcon) {
+        runBtnIcon.textContent = simulationRunning ? 'pause' : 'play_arrow';
+      }
+      if (runBtn) {
+        runBtn.classList.toggle('ring-2', simulationRunning);
+        runBtn.classList.toggle('ring-tertiary', simulationRunning);
+      }
+    }
+
+    function updateControlLabels() {
+      const anomalyFrequency = getControlNumber(controls.anomalyFrequency, 12);
+      const anomalySeverity = getControlNumber(controls.anomalySeverity, 80);
+      const alertBurst = getControlNumber(controls.alertBurst, 20);
+      const alertCriticality = getControlNumber(controls.alertCriticality, 50);
+      const qualityDrift = getControlNumber(controls.qualityDrift, 15);
+      const latencyDelay = getControlNumber(controls.latencyDelay, 0);
+      const latencyJitter = getControlNumber(controls.latencyJitter, 0);
+
+      if (labels.anomalyFrequency) labels.anomalyFrequency.textContent = anomalyFrequency + '/min';
+      if (labels.anomalySeverity) labels.anomalySeverity.textContent = anomalySeverityText(anomalySeverity);
+      if (labels.alertBurst) labels.alertBurst.textContent = burstText(alertBurst);
+      if (labels.alertCriticality) labels.alertCriticality.textContent = criticalityText(alertCriticality);
+      if (labels.qualityInterval) labels.qualityInterval.textContent = qualityIntervalSeconds().toFixed(1) + 's';
+      if (labels.qualityDrift) labels.qualityDrift.textContent = driftText(qualityDrift);
+      if (labels.latencyDelay) labels.latencyDelay.textContent = latencyDelay + 'ms';
+      if (labels.latencyJitter) labels.latencyJitter.textContent = jitterText(latencyJitter);
+
+      const latencyEnabled = Boolean(controls.latencyEnabled && controls.latencyEnabled.checked);
+      if (controls.latencyDelay) {
+        controls.latencyDelay.disabled = !latencyEnabled;
+        controls.latencyDelay.classList.toggle('cursor-not-allowed', !latencyEnabled);
+        controls.latencyDelay.classList.toggle('cursor-pointer', latencyEnabled);
+      }
+      if (controls.latencyJitter) {
+        controls.latencyJitter.disabled = !latencyEnabled;
+        controls.latencyJitter.classList.toggle('cursor-not-allowed', !latencyEnabled);
+        controls.latencyJitter.classList.toggle('cursor-pointer', latencyEnabled);
+      }
+      if (latencyControlsContainer) {
+        latencyControlsContainer.classList.toggle('opacity-50', !latencyEnabled);
+      }
+
+      updateProjectedMetrics();
+    }
 
     function addOutput(type, message, colorClass) {
       if (!outputEl) return;
@@ -423,7 +762,7 @@
       row.appendChild(text);
       outputEl.prepend(row);
 
-      while (outputEl.children.length > 40) {
+      while (outputEl.children.length > MAX_OUTPUT_ROWS) {
         outputEl.removeChild(outputEl.lastChild);
       }
     }
@@ -432,6 +771,12 @@
       if (!bandwidthEl) return;
       const mbPerSec = Math.max(0.1, Number(volume || 0) / 50000);
       bandwidthEl.innerHTML = mbPerSec.toFixed(1) + ' <span class="text-sm text-on-surface-variant font-normal">MB/s</span>';
+    }
+
+    function bumpAcceptedCounter() {
+      if (!totalEventsEl) return;
+      const current = readNumber(totalEventsEl.textContent, 0);
+      totalEventsEl.textContent = Math.max(0, current + 1).toLocaleString();
     }
 
     async function refreshOverview() {
@@ -456,7 +801,7 @@
 
         ws.onopen = function () {
           if (feedIdEl) {
-            feedIdEl.textContent = 'SONAR_FEED_ID: ws://localhost:4000';
+            feedIdEl.textContent = 'SONAR_FEED_ID: ' + WS_URL;
           }
           addOutput('INFO', 'Connected to real-time feed', 'text-primary');
         };
@@ -471,13 +816,6 @@
             const color = type.includes('ALERT') ? 'text-tertiary' : (type.includes('QUALITY') ? 'text-secondary' : 'text-primary');
 
             addOutput(type, message, color);
-
-            if (totalEventsEl) {
-              const current = Number(String(totalEventsEl.textContent || '0').replace(/,/g, ''));
-              if (!Number.isNaN(current)) {
-                totalEventsEl.textContent = (current + 1).toLocaleString();
-              }
-            }
             setSyntheticBandwidth(wsEventCount * 1200);
           } catch (_err) {
             addOutput('WARN', 'Received non-JSON websocket frame', 'text-tertiary');
@@ -497,18 +835,302 @@
       }
     }
 
+    function calculateTickIntervalMs() {
+      let targetEventsPerMinute = calculateTargetEventsPerMinute();
+      if (targetEventsPerMinute <= 0) {
+        targetEventsPerMinute = 12;
+      }
+      return Math.max(250, Math.round(60000 / targetEventsPerMinute));
+    }
+
+    function shouldGenerateInvalidEvent() {
+      return Math.random() < calculateInvalidProbability();
+    }
+
+    function buildValidPayload() {
+      const selectedSource = randomChoice(sourceCatalog) || sourceCatalog[0];
+      const qualityDrift = getControlNumber(controls.qualityDrift, 15);
+      const recordCount = randomInt(5, 60 + Math.round(qualityDrift * 1.2));
+      const amount = Number((80 + Math.random() * 220 + qualityDrift).toFixed(2));
+      const eventType = qualityDrift > 70 ? 'incremental' : 'snapshot';
+
+      requestSequence += 1;
+      return {
+        sourceId: selectedSource.sourceId,
+        sourceName: selectedSource.sourceName,
+        sourceType: selectedSource.sourceType,
+        eventType,
+        timestamp: new Date().toISOString(),
+        data: {
+          schema: {
+            id: 'string',
+            amount: 'number',
+            status: 'string',
+            updatedAt: 'string'
+          },
+          records: [
+            {
+              id: 'sim-row-' + Date.now() + '-' + requestSequence,
+              amount,
+              status: amount > 260 ? 'review' : 'ok',
+              updatedAt: new Date().toISOString()
+            }
+          ],
+          recordCount
+        },
+        metadata: {
+          pipeline: selectedSource.pipeline,
+          environment: 'development',
+          tags: ['simulation', 'mock-controls', 'healthy'],
+          batchId: 'sim-batch-' + Date.now()
+        }
+      };
+    }
+
+    function buildInvalidPayload(basePayload) {
+      const alertCriticality = getControlNumber(controls.alertCriticality, 50);
+      const malformed = {
+        sourceName: basePayload.sourceName,
+        sourceType: alertCriticality > 80 ? 'magic' : 'stream',
+        eventType: 'snapshot',
+        timestamp: alertCriticality > 70 ? 'not-a-date' : 'yesterday',
+        data: {
+          records: [
+            {
+              id: 'invalid-' + Date.now(),
+              bad: true,
+              reason: 'simulated-validation-failure'
+            }
+          ],
+          recordCount: -1
+        },
+        metadata: {
+          pipeline: basePayload.metadata.pipeline,
+          environment: 'development',
+          tags: ['simulation', 'invalid']
+        }
+      };
+
+      return malformed;
+    }
+
+    function wait(ms) {
+      return new Promise(function (resolve) {
+        setTimeout(resolve, ms);
+      });
+    }
+
+    async function applySimulatedLatency() {
+      const latencyEnabled = Boolean(controls.latencyEnabled && controls.latencyEnabled.checked);
+      if (!latencyEnabled) return 0;
+
+      const delay = getControlNumber(controls.latencyDelay, 0);
+      const jitter = getControlNumber(controls.latencyJitter, 0);
+      const jitterOffset = jitter > 0 ? randomInt(-jitter, jitter) : 0;
+      const totalDelay = Math.max(0, delay + jitterOffset);
+
+      if (totalDelay > 0) {
+        await wait(totalDelay);
+      }
+
+      return totalDelay;
+    }
+
+    async function postIngestionEvent(payload) {
+      try {
+        const response = await fetch(INGEST_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const text = await response.text();
+        let body;
+
+        try {
+          body = JSON.parse(text);
+        } catch (_err) {
+          body = { raw: text };
+        }
+
+        return {
+          ok: response.ok,
+          status: response.status,
+          body
+        };
+      } catch (error) {
+        return {
+          ok: false,
+          status: 0,
+          networkError: true,
+          body: { message: error && error.message ? error.message : 'Network request failed' }
+        };
+      }
+    }
+
+    function summarizeValidationError(body) {
+      if (!body || !Array.isArray(body.errors) || body.errors.length === 0) {
+        return 'Validation failed';
+      }
+
+      const firstError = body.errors[0];
+      const field = firstError && firstError.field ? String(firstError.field) : 'payload';
+      const message = firstError && firstError.message ? String(firstError.message) : 'invalid value';
+      return field + ': ' + message;
+    }
+
+    async function simulationTick() {
+      if (!simulationRunning || simulationTickInFlight) {
+        return;
+      }
+
+      simulationTickInFlight = true;
+      try {
+        const sendInvalid = shouldGenerateInvalidEvent();
+        const basePayload = buildValidPayload();
+        const payload = sendInvalid ? buildInvalidPayload(basePayload) : basePayload;
+        const appliedDelay = await applySimulatedLatency();
+        const result = await postIngestionEvent(payload);
+
+        localSimulationEvents += 1;
+
+        const elapsedSeconds = Math.max(1, (Date.now() - simulationStartedAt) / 1000);
+        const eventsPerSecond = localSimulationEvents / elapsedSeconds;
+        setSyntheticBandwidth(eventsPerSecond * 9000);
+
+        if (result.status === 202) {
+          bumpAcceptedCounter();
+          const delaySuffix = appliedDelay > 0 ? ' after ' + appliedDelay + 'ms delay' : '';
+          addOutput('QUALITY', 'Accepted event for ' + basePayload.sourceId + delaySuffix, 'text-secondary');
+        } else if (result.status === 400) {
+          localRejectedEvents += 1;
+          addOutput(
+            'ANOMALY',
+            'Rejected event for ' + basePayload.sourceName + ' (' + summarizeValidationError(result.body) + ')',
+            'text-primary'
+          );
+        } else if (result.networkError) {
+          addOutput('ERROR', 'Ingestion unreachable at ' + INGEST_URL, 'text-error');
+        } else {
+          addOutput('WARN', 'Unexpected ingestion response status ' + result.status, 'text-tertiary');
+        }
+
+        if (localSimulationEvents % 6 === 0) {
+          refreshOverview();
+        }
+      } finally {
+        simulationTickInFlight = false;
+      }
+    }
+
+    function stopSimulation(reason) {
+      if (!simulationRunning) {
+        return;
+      }
+
+      simulationRunning = false;
+      if (simulationTimerId) {
+        clearInterval(simulationTimerId);
+        simulationTimerId = null;
+      }
+
+      updateRunButtonState();
+      if (reason) {
+        addOutput('INFO', reason, 'text-primary');
+      }
+    }
+
+    function startSimulation() {
+      const qualityEnabled = Boolean(controls.qualityEnabled && controls.qualityEnabled.checked);
+      const anomalyEnabled = Boolean(controls.anomalyEnabled && controls.anomalyEnabled.checked);
+      const alertEnabled = Boolean(controls.alertEnabled && controls.alertEnabled.checked);
+
+      if (!qualityEnabled && !anomalyEnabled && !alertEnabled) {
+        addOutput('WARN', 'Enable Quality, Anomaly, or Alert mode before running simulation', 'text-tertiary');
+        return;
+      }
+
+      simulationRunning = true;
+      simulationStartedAt = Date.now();
+      simulationTickInFlight = false;
+
+      const tickInterval = calculateTickIntervalMs();
+      simulationTimerId = setInterval(simulationTick, tickInterval);
+
+      updateRunButtonState();
+      addOutput('INFO', 'Simulation started at ' + tickInterval + 'ms cadence', 'text-primary');
+      simulationTick();
+    }
+
+    function rescheduleSimulationIfRunning() {
+      if (!simulationRunning) {
+        return;
+      }
+
+      if (simulationTimerId) {
+        clearInterval(simulationTimerId);
+      }
+
+      const tickInterval = calculateTickIntervalMs();
+      simulationTimerId = setInterval(simulationTick, tickInterval);
+    }
+
+    function resetLocalState() {
+      stopSimulation('Simulation stopped and local counters reset');
+
+      localSimulationEvents = 0;
+      localRejectedEvents = 0;
+      wsEventCount = 0;
+
+      applySettings(DEFAULT_SETTINGS);
+      persistSettings();
+
+      if (outputEl) {
+        outputEl.innerHTML = '';
+      }
+
+      setSyntheticBandwidth(0);
+      addOutput('SUCCESS', 'Controls reset. New simulation runs will use default settings.', 'text-secondary');
+      refreshOverview();
+    }
+
+    function attachControlListeners() {
+      Object.keys(controls).forEach(function (key) {
+        const control = controls[key];
+        if (!control) return;
+
+        const eventName = control.type === 'checkbox' ? 'change' : 'input';
+        control.addEventListener(eventName, function () {
+          updateControlLabels();
+          persistSettings();
+          rescheduleSimulationIfRunning();
+        });
+      });
+    }
+
     if (runBtn) {
       runBtn.addEventListener('click', function () {
-        addOutput('INFO', 'Simulation trigger requested (UI-only control in this Stitch page)', 'text-primary');
+        if (simulationRunning) {
+          stopSimulation('Simulation paused');
+          return;
+        }
+
+        startSimulation();
       });
     }
 
     if (resetBtn) {
-      resetBtn.addEventListener('click', function () {
-        wsEventCount = 0;
-        addOutput('SUCCESS', 'Local mock counters reset', 'text-secondary');
-        refreshOverview();
-      });
+      resetBtn.addEventListener('click', resetLocalState);
+    }
+
+    loadSavedSettings();
+    updateRunButtonState();
+    attachControlListeners();
+
+    if (feedIdEl) {
+      feedIdEl.textContent = 'INGEST_URL: ' + INGEST_URL;
     }
 
     refreshOverview();

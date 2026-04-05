@@ -13,10 +13,10 @@
     />
     <style>
       :root {
-        --bg-deep: #0c1a24;
-        --bg-mid: #143244;
-        --card: rgba(7, 25, 38, 0.84);
-        --ink: #e8f7ff;
+        --bg-deep: #08131d;
+        --bg-mid: #123046;
+        --card: rgba(6, 19, 30, 0.9);
+        --ink: #f2f9ff;
         --accent: #ffd166;
         --ok: #00c853;
         --err: #ff4d6d;
@@ -61,11 +61,11 @@
   </head>
   <body class="soft-grid">
     <main class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-6 md:px-8 md:py-10">
-      <header class="rounded-2xl border border-cyan-100/20 bg-cyan-950/50 p-5 shadow-2xl backdrop-blur-md md:p-7 flex justify-between items-center">
+      <header class="rounded-2xl border border-cyan-100/30 bg-slate-950/75 p-5 shadow-2xl backdrop-blur-md md:p-7 flex justify-between items-center">
         <div>
-          <p class="text-xs uppercase tracking-[0.25em] text-cyan-100/80">DataSonar Control Center</p>
+          <p class="text-xs uppercase tracking-[0.25em] text-cyan-100">DataSonar Control Center</p>
           <h1 class="mt-2 text-3xl font-bold leading-tight md:text-5xl">Break My Pipeline</h1>
-          <p class="mt-3 max-w-3xl text-sm text-cyan-100/80 md:text-base">
+          <p class="mt-3 max-w-3xl text-sm text-cyan-50 md:text-base">
             Edit the event payload and send it to ingestion. Valid payloads should return 202.
             Broken payloads should return 400 and route to the dead-letter topic.
           </p>
@@ -77,23 +77,23 @@
       </header>
 
       <section class="grid gap-6 lg:grid-cols-[2fr,1fr]">
-        <article class="rounded-2xl border border-cyan-100/20 bg-(--card) p-4 shadow-xl backdrop-blur-sm md:p-6">
+        <article class="rounded-2xl border border-cyan-100/25 bg-slate-950/75 p-4 shadow-xl backdrop-blur-sm md:p-6">
           <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-lg font-semibold">Event Payload</h2>
-            <span class="rounded-full border border-amber-300/60 bg-amber-300/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-100">
+            <span class="rounded-full border border-amber-300/70 bg-amber-300/25 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-50">
               Tip: press malformed values to test DLQ
             </span>
           </div>
           <textarea
             id="payload"
-            class="mono h-[48vh] w-full resize-y rounded-xl border border-cyan-100/20 bg-slate-950/80 p-4 text-sm leading-relaxed text-cyan-50 outline-none ring-0 transition focus:border-cyan-300/60"
+            class="mono h-[48vh] w-full resize-y rounded-xl border border-cyan-100/30 bg-slate-950/95 p-4 text-sm leading-relaxed text-slate-100 outline-none ring-0 transition focus:border-cyan-300/80"
             spellcheck="false"
             aria-label="Pipeline payload JSON"
           ></textarea>
           <div class="mt-4 flex flex-wrap gap-3">
             <button
               id="send-btn"
-              class="rounded-xl bg-(--accent) px-6 py-3 text-base font-bold text-slate-900 shadow-lg transition hover:brightness-105 active:translate-y-px"
+              class="rounded-xl bg-amber-300 px-6 py-3 text-base font-bold text-slate-950 shadow-lg transition hover:bg-amber-200 active:translate-y-px"
             >
               Send to Pipeline
             </button>
@@ -112,11 +112,11 @@
           </div>
         </article>
 
-        <aside class="rounded-2xl border border-cyan-100/20 bg-(--card) p-4 shadow-xl backdrop-blur-sm md:p-6">
+        <aside class="rounded-2xl border border-cyan-100/25 bg-slate-950/75 p-4 shadow-xl backdrop-blur-sm md:p-6">
           <h2 class="text-lg font-semibold">Response</h2>
-          <p class="mt-2 text-sm text-cyan-100/80">
+          <p class="mt-2 text-sm text-slate-200">
             Endpoint:
-            <span class="mono text-cyan-50">http://localhost:3001/api/v1/ingest</span>
+            <span class="mono text-cyan-100">http://localhost:3001/api/v1/ingest</span>
           </p>
           <div id="response-container" class="mt-4 space-y-3"></div>
         </aside>
@@ -183,14 +183,14 @@
       function renderBanner(kind, title, message, rawBody) {
         const palette =
           kind === 'ok'
-            ? 'border-emerald-300/50 bg-emerald-900/40 text-emerald-100'
-            : 'border-rose-300/50 bg-rose-900/40 text-rose-100';
+            ? 'border-emerald-300/70 bg-emerald-950/70 text-emerald-50'
+            : 'border-rose-300/70 bg-rose-950/70 text-rose-50';
 
         responseContainer.innerHTML = `
           <article class="fade-in rounded-xl border p-4 ${palette}">
             <h3 class="text-base font-bold">${title}</h3>
             <p class="mt-2 text-sm leading-relaxed">${message}</p>
-            <pre class="mono mt-3 max-h-72 overflow-auto rounded-lg bg-black/25 p-3 text-xs">${rawBody}</pre>
+            <pre class="mono mt-3 max-h-72 overflow-auto rounded-lg bg-slate-950/80 p-3 text-xs text-slate-100">${rawBody}</pre>
           </article>
         `;
       }
