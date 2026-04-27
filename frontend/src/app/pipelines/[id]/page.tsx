@@ -4,11 +4,12 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { QualityRadar } from '@/components/charts/QualityRadar';
 import { usePipelineDetail } from '@/hooks/useDashboardData';
+import { ArrowLeftRight, ArrowRight, Check, ChevronRight, Cpu, Database, FileCode2, HardDrive, List, Minus, Play, Plus, Settings, ShieldCheck } from 'lucide-react';
 
 export default function PipelineDetailsPage() {
   const params = useParams();
   const id = params.id as string;
-  const { data: pipeline, isLoading, error, refetch } = usePipelineDetail(id);
+  const { data: pipeline, isLoading, error } = usePipelineDetail(id);
 
   if (isLoading) {
     return (
@@ -47,7 +48,7 @@ export default function PipelineDetailsPage() {
       {/* Breadcrumb Header */}
       <div className="flex items-center text-sm font-medium text-on-surface-variant mb-6">
         <Link href="/pipelines" className="hover:text-primary transition-colors decoration-transparent cursor-pointer">Pipelines</Link>
-        <span className="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+        <ChevronRight className="mx-1 h-4 w-4" aria-hidden="true" />
         <span className="text-on-surface font-bold">{pipeline.name}</span>
       </div>
 
@@ -71,7 +72,7 @@ export default function PipelineDetailsPage() {
             </div>
             <div className="flex items-center gap-6 mt-4">
               <div className="flex items-center gap-2 text-sm bg-surface-container-high px-3 py-1.5 rounded-md border border-outline-variant/10 font-mono">
-                <span className="material-symbols-outlined text-[16px] text-primary">data_object</span>
+                <Database className="h-4 w-4 text-primary" aria-hidden="true" />
                 {pipeline.sourceType}
               </div>
               <div className="flex items-center gap-2 text-sm text-on-surface-variant bg-surface-container-highest px-3 py-1 bg-opacity-30 rounded-full font-medium">
@@ -83,11 +84,11 @@ export default function PipelineDetailsPage() {
 
           <div className="flex gap-4">
             <button className="flex items-center gap-2 px-4 py-2 border border-outline-variant/20 bg-surface-container text-on-surface font-semibold rounded-lg hover:bg-surface-container-high transition-colors text-sm cursor-pointer whitespace-nowrap w-24">
-              <span className="material-symbols-outlined text-[18px]">settings</span>
+              <Settings className="h-4.5 w-4.5" aria-hidden="true" />
               Config
             </button>
             <button className="flex items-center gap-2 px-4 py-2 bg-linear-to-br from-primary to-primary-dim text-on-primary font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 border-0 text-sm cursor-pointer whitespace-nowrap w-24">
-              <span className="material-symbols-outlined text-[18px]">play_arrow</span>
+              <Play className="h-4.5 w-4.5" aria-hidden="true" />
               Actions
             </button>
           </div>
@@ -103,7 +104,7 @@ export default function PipelineDetailsPage() {
           <div className="bg-surface-container-low border border-outline-variant/10 rounded-2xl p-6 shadow-xl">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-bold flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">verified</span>
+                <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
                 Quality Dimensions
               </h3>
               <div className="text-3xl font-black font-mono">
@@ -118,7 +119,7 @@ export default function PipelineDetailsPage() {
                   <div key={key}>
                     <div className="flex justify-between text-sm mb-2 font-bold uppercase tracking-wider">
                       <span className="text-on-surface-variant flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-[14px] opacity-70">done</span>
+                        <Check className="h-3.5 w-3.5 opacity-70" aria-hidden="true" />
                         {key}
                       </span>
                       <span className="font-mono">{value.toFixed(1)}%</span>
@@ -142,7 +143,7 @@ export default function PipelineDetailsPage() {
           {/* Schema Evolution Box */}
           <div className="bg-surface-container-low border border-outline-variant/10 rounded-2xl p-6 shadow-xl">
             <h3 className="text-lg font-bold flex items-center gap-2 mb-6">
-              <span className="material-symbols-outlined text-tertiary">schema</span>
+              <FileCode2 className="h-5 w-5 text-tertiary" aria-hidden="true" />
               Schema Evolution
             </h3>
             
@@ -150,9 +151,9 @@ export default function PipelineDetailsPage() {
               {pipeline.schemaEvents.map((evt, i) => (
                 <div key={i} className="flex gap-4 p-4 rounded-xl border border-outline-variant/10 bg-surface-container/30">
                   <div className="mt-0.5">
-                    {evt.changeType.includes('ADDED') && <span className="material-symbols-outlined text-secondary bg-secondary/10 p-1.5 rounded-md">add_box</span>}
-                    {evt.changeType.includes('REMOVED') && <span className="material-symbols-outlined text-error bg-error/10 p-1.5 rounded-md">indeterminate_check_box</span>}
-                    {evt.changeType.includes('TYPE') && <span className="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-md">swap_horiz</span>}
+                    {evt.changeType.includes('ADDED') && <Plus className="h-7 w-7 text-secondary bg-secondary/10 p-1.5 rounded-md" aria-hidden="true" />}
+                    {evt.changeType.includes('REMOVED') && <Minus className="h-7 w-7 text-error bg-error/10 p-1.5 rounded-md" aria-hidden="true" />}
+                    {evt.changeType.includes('TYPE') && <ArrowLeftRight className="h-7 w-7 text-primary bg-primary/10 p-1.5 rounded-md" aria-hidden="true" />}
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
@@ -162,7 +163,7 @@ export default function PipelineDetailsPage() {
                     {evt.changeType.includes('TYPE') && (
                       <div className="text-sm text-on-surface-variant mt-2 flex items-center gap-2 font-mono">
                         <span className="line-through opacity-70 border px-1 rounded border-outline-variant/20">{evt.oldType}</span>
-                        <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                        <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                         <span className="text-on-surface border border-outline-variant/20 px-1 rounded">{evt.newType}</span>
                       </div>
                     )}
@@ -193,19 +194,19 @@ export default function PipelineDetailsPage() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
                   <span className="text-on-surface-variant text-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[16px]">memory</span> CPU
+                    <Cpu className="h-4 w-4" aria-hidden="true" /> CPU
                   </span>
                   <span className="font-mono font-bold">{pipeline.resources.cpu}%</span>
                 </div>
                 <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
                   <span className="text-on-surface-variant text-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[16px]">storage</span> RAM
+                    <HardDrive className="h-4 w-4" aria-hidden="true" /> RAM
                   </span>
                   <span className="font-mono font-bold">{pipeline.resources.memory}</span>
                 </div>
                 <div className="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-outline-variant/5">
                   <span className="text-on-surface-variant text-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[16px]">queue</span> Backlog
+                    <List className="h-4 w-4" aria-hidden="true" /> Backlog
                   </span>
                   <span className="font-mono font-bold">{pipeline.resources.backlog}</span>
                 </div>

@@ -2,6 +2,7 @@
 
 import { VolumeChart } from '@/components/charts/VolumeChart';
 import { useOverview } from '@/hooks/useDashboardData';
+import { CalendarDays, ChevronDown, Database, RefreshCw, ShieldCheck, TriangleAlert, ChartColumnIncreasing } from 'lucide-react';
 
 export default function OverviewPage() {
   const { data: metrics, isLoading, error, refetch } = useOverview();
@@ -34,15 +35,15 @@ export default function OverviewPage() {
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center bg-surface-container px-4 py-2 rounded-lg border border-outline-variant/10 text-sm font-medium">
-            <span className="material-symbols-outlined text-on-surface-variant text-sm mr-2">calendar_today</span>
+            <CalendarDays className="mr-2 h-4 w-4 text-on-surface-variant" aria-hidden="true" />
             <span>Last 24 Hours</span>
-            <span className="material-symbols-outlined text-on-surface-variant text-sm ml-2">expand_more</span>
+            <ChevronDown className="ml-2 h-4 w-4 text-on-surface-variant" aria-hidden="true" />
           </div>
           <button 
             onClick={() => refetch()}
             className="flex items-center gap-2 px-4 py-2 bg-linear-to-br from-primary to-primary-dim text-on-primary font-semibold rounded-md shadow-lg shadow-primary/10 hover:opacity-90 transition-all active:scale-95 border-0 cursor-pointer"
           >
-            <span className="material-symbols-outlined text-sm">refresh</span>
+            <RefreshCw className="h-4 w-4" aria-hidden="true" />
             <span>Refresh</span>
           </button>
         </div>
@@ -54,7 +55,7 @@ export default function OverviewPage() {
           <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="flex justify-between items-start mb-3">
             <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Total Events</span>
-            <span className="material-symbols-outlined text-primary text-xl">database</span>
+            <Database className="h-5 w-5 text-primary" aria-hidden="true" />
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold font-mono">
@@ -69,7 +70,7 @@ export default function OverviewPage() {
         <div className="bg-surface-container p-5 rounded-xl border-l-2 border-secondary relative overflow-hidden group">
           <div className="flex justify-between items-start mb-3">
             <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Avg Quality</span>
-            <span className="material-symbols-outlined text-secondary text-xl">verified</span>
+            <ShieldCheck className="h-5 w-5 text-secondary" aria-hidden="true" />
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold font-mono">{metrics.avgQualityScore.toFixed(1)}%</span>
@@ -80,7 +81,7 @@ export default function OverviewPage() {
         <div className="bg-surface-container p-5 rounded-xl border-l-2 border-error relative overflow-hidden group">
           <div className="flex justify-between items-start mb-3">
             <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Active Alerts</span>
-            <span className="material-symbols-outlined text-error text-xl">warning</span>
+            <TriangleAlert className="h-5 w-5 text-error" aria-hidden="true" />
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold font-mono">{metrics.activeAlerts}</span>
@@ -91,7 +92,7 @@ export default function OverviewPage() {
         <div className="bg-surface-container p-5 rounded-xl border-l-2 border-tertiary relative overflow-hidden group">
           <div className="flex justify-between items-start mb-3">
             <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Anomalies</span>
-            <span className="material-symbols-outlined text-tertiary text-xl">analytics</span>
+            <ChartColumnIncreasing className="h-5 w-5 text-tertiary" aria-hidden="true" />
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-bold font-mono">{metrics.anomaliesDetected}</span>

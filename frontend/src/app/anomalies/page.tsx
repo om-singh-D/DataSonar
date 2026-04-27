@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useAlerts, useResolveAlert } from '@/hooks/useDashboardData';
+import { CalendarDays, CheckCircle2, CircleAlert, Info, TriangleAlert } from 'lucide-react';
 
 import Link from 'next/link';
 
@@ -99,10 +100,13 @@ export default function AnomaliesPage() {
                   alert.severity === 'high' || alert.severity === 'critical' ? 'bg-error/10 text-error' :
                   alert.severity === 'medium' ? 'bg-tertiary/10 text-tertiary' : 'bg-secondary/10 text-secondary'
                 }`}>
-                  <span className="material-symbols-outlined text-[24px]">
-                    {alert.severity === 'high' || alert.severity === 'critical' ? 'error' : 
-                     alert.severity === 'medium' ? 'warning' : 'info'}
-                  </span>
+                  {alert.severity === 'high' || alert.severity === 'critical' ? (
+                    <CircleAlert className="h-6 w-6" aria-hidden="true" />
+                  ) : alert.severity === 'medium' ? (
+                    <TriangleAlert className="h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Info className="h-6 w-6" aria-hidden="true" />
+                  )}
                 </div>
                 
                 <div>
@@ -119,7 +123,7 @@ export default function AnomaliesPage() {
                   </h3>
                   <div className="flex items-center gap-4 text-xs text-on-surface-variant font-medium">
                     <div className="flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">calendar_today</span>
+                      <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
                       {new Date(alert.timestamp).toLocaleString()}
                     </div>
                   </div>
@@ -131,7 +135,7 @@ export default function AnomaliesPage() {
                   <button 
                     onClick={() => resolveMutation.mutate(alert.id)}
                     disabled={resolveMutation.isPending}
-                    className="px-4 py-2 bg-gradient-to-br from-surface-container to-surface-container-high border border-outline-variant/30 text-on-surface font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:border-primary/50 transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+                    className="px-4 py-2 bg-linear-to-br from-surface-container to-surface-container-high border border-outline-variant/30 text-on-surface font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:border-primary/50 transition-all active:scale-95 cursor-pointer disabled:opacity-50"
                   >
                     Resolve
                   </button>
@@ -148,7 +152,7 @@ export default function AnomaliesPage() {
 
         {alerts.length === 0 && (
           <div className="bg-surface-container-low border border-dashed border-outline-variant/30 rounded-2xl p-12 text-center text-on-surface-variant">
-            <span className="material-symbols-outlined text-5xl mb-3 opacity-30">check_circle</span>
+            <CheckCircle2 className="mx-auto mb-3 h-12 w-12 opacity-30" aria-hidden="true" />
             <h3 className="text-lg font-bold text-on-surface mb-1">All Clear</h3>
             <p>No {filterStatus} alerts found matching the current filters.</p>
           </div>
