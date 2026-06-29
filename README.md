@@ -1,3 +1,18 @@
+## 📄 Research Publication
+
+[![Conference](https://img.shields.io/badge/Conference-AsiaConf%202026-blue)](#)
+[![Paper](https://img.shields.io/badge/Research%20Paper-PDF-red)](https://drive.google.com/file/d/1qU0DQiFB3Nt7UA5GDso4TG7aDrOikPoD/view?usp=drive_link)
+
+This project is accompanied by a research paper published at **AsiaConf 2026**.
+
+### 📝 Paper
+
+**DataSonar: A Real-Time Data Pipeline Quality Monitoring & Anomaly Detection Platform**
+
+📄 **Research Paper:**  
+https://drive.google.com/file/d/1qU0DQiFB3Nt7UA5GDso4TG7aDrOikPoD/view?usp=drive_link
+
+
 # 🔍 DataSonar
 
 > Real-time data pipeline quality monitoring & anomaly detection platform
