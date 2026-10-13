@@ -85,7 +85,7 @@ async def process_message(
         pipeline_id=str(payload.get("pipelineId") or source_id),
         detected_at=datetime.now(timezone.utc),
         anomaly_types=anomaly_types,
-        severity="HIGH" if strength >= 0.8 else "MEDIUM",
+        severity="high" if strength >= 0.8 else "medium",
         summary=(
             f"Detected {', '.join(anomaly_types)} for source "
             f"{source_id}; quality score={score:.3f}, "
