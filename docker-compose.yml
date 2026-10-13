@@ -1,4 +1,4 @@
-services:
+﻿services:
   # ============================================
   # MESSAGE BROKERS
   # ============================================
@@ -192,6 +192,34 @@ services:
   # APPLICATION SERVICES
   # ============================================
 
+  quality-engine:
+    build:
+      context: ./services/quality-engine
+      dockerfile: Dockerfile
+    container_name: datasonar-quality-engine
+    ports:
+      - "8000:8000"
+    environment:
+      SERVICE_NAME: datasonar-quality-engine
+      SERVICE_PORT: "8000"
+      ENVIRONMENT: development
+      LOG_LEVEL: INFO
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_GROUP_ID: quality-engine-group
+      KAFKA_RAW_EVENTS_TOPIC: datasonar.raw-events
+      KAFKA_OUTPUT_TOPIC: datasonar.quality-scores
+      KAFKA_DLQ_TOPIC: datasonar.quality-engine-dlq
+      MONGODB_URI: mongodb://datasonar:datasonar_secret@mongodb:27017/datasonar?authSource=admin
+      MONGODB_DB_NAME: datasonar
+      MONGODB_COLLECTION: quality_reports
+    depends_on:
+      kafka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - datasonar-network
   anomaly-detector:
     build:
       context: ./services/anomaly-detector

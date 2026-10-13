@@ -1,4 +1,4 @@
-FROM python:3.11-slim AS builder
+﻿FROM python:3.11-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -27,9 +27,10 @@ WORKDIR /app
 
 COPY --from=builder /opt/venv /opt/venv
 COPY app ./app
+RUN mkdir -p /app/models/trained /app/models/baselines && chown -R datasonar:datasonar /app
 
 USER datasonar
 
 EXPOSE 8002
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8002"]
+CMD ["python", "-m", "app.worker"]

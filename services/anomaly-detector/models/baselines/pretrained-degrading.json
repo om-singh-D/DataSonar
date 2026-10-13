@@ -1,0 +1,9 @@
+{
+  "source_id": "pretrained-degrading",
+  "updated_at": "2026-10-07T18:31:17.114342+00:00",
+  "quality_mean": 0.8042614244615364,
+  "quality_std": 0.05892329833748761,
+  "volume_mean": 8249.92,
+  "data_points": 50,
+  "trained_at": "2026-10-07T18:31:16.865466"
+}
