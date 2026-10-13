@@ -48,12 +48,12 @@ export class RabbitMQConsumer {
     await channel.assertQueue(this.queue, {
       durable: true,
       arguments: {
+        'x-dead-letter-exchange': '',
         'x-dead-letter-routing-key': this.dlq,
       },
     });
     await channel.bindQueue(this.queue, this.exchange, this.routingKey);
     await channel.prefetch(20);
-
     this.connection = connection;
     this.channel = channel;
   }

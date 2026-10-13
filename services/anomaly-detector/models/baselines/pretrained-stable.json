@@ -1,0 +1,9 @@
+{
+  "source_id": "pretrained-stable",
+  "updated_at": "2026-10-07T18:31:16.371637+00:00",
+  "quality_mean": 0.9234087353903254,
+  "quality_std": 0.028034936162648686,
+  "volume_mean": 12479.0,
+  "data_points": 50,
+  "trained_at": "2026-10-07T18:31:16.325776"
+}

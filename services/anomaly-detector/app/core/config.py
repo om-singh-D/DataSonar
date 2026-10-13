@@ -1,4 +1,4 @@
-"""Application configuration for terminal-only anomaly detector."""
+﻿"""Application configuration for terminal-only anomaly detector."""
 
 from __future__ import annotations
 
@@ -9,21 +9,27 @@ from pathlib import Path
 
 @dataclass
 class Settings:
-    """Anomaly detector configuration — terminal mode."""
+    """Anomaly detector configuration â€” terminal mode."""
 
-    # ── General ──────────────────────────────────────────────────────
+    # â”€â”€ General â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     SERVICE_NAME: str = "datasonar-anomaly-detector"
     LOG_LEVEL: str = "INFO"
+    KAFKA_BROKERS: str = field(default_factory=lambda: os.getenv("KAFKA_BROKERS", "kafka:29092"))
+    KAFKA_CONSUMER_GROUP: str = field(default_factory=lambda: os.getenv("KAFKA_CONSUMER_GROUP", "anomaly-detector-group"))
+    KAFKA_TOPIC_QUALITY_SCORED: str = field(default_factory=lambda: os.getenv("KAFKA_TOPIC_QUALITY_SCORED", "datasonar.quality-scores"))
+    RABBITMQ_URL: str = field(default_factory=lambda: os.getenv("RABBITMQ_URL", "amqp://datasonar:datasonar_secret@localhost:5672/datasonar"))
+    RABBITMQ_EXCHANGE: str = field(default_factory=lambda: os.getenv("RABBITMQ_EXCHANGE", "alerts.exchange"))
+    RABBITMQ_ROUTING_KEY: str = field(default_factory=lambda: os.getenv("RABBITMQ_ROUTING_KEY", "alert.anomaly.detected"))
 
-    # ── Model storage ────────────────────────────────────────────────
+    # â”€â”€ Model storage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     MODEL_DIR: str = ""  # resolved in __post_init__
     BASELINE_DIR: str = ""  # resolved in __post_init__
 
-    # ── ML thresholds ────────────────────────────────────────────────
+    # â”€â”€ ML thresholds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     ANOMALY_ALERT_THRESHOLD: float = 0.6
     DRIFT_MEAN_DELTA_THRESHOLD: float = 0.1
 
-    # ── Training parameters ──────────────────────────────────────────
+    # â”€â”€ Training parameters â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     PRETRAIN_PROFILES: list[str] = field(
         default_factory=lambda: ["stable", "volatile", "degrading"]
     )
@@ -32,17 +38,20 @@ class Settings:
     ISO_FOREST_CONTAMINATION: float = 0.08
     ISO_FOREST_RANDOM_STATE: int = 42
 
-    # ── Time-series EWMA ─────────────────────────────────────────────
+    # â”€â”€ Time-series EWMA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     EWMA_SPAN: int = 24
     EWMA_Z_THRESHOLD: float = 3.0
 
-    # ── History limits ───────────────────────────────────────────────
+    # â”€â”€ History limits â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     QUALITY_HISTORY_LIMIT: int = 1000
     VOLUME_HISTORY_LIMIT: int = 500
 
-    # ── Batch processing ─────────────────────────────────────────────
+    # â”€â”€ Batch processing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     BATCH_CHUNK_SIZE: int = 50_000
 
+    @property
+    def kafka_brokers_list(self) -> list[str]:
+        return [b.strip() for b in self.KAFKA_BROKERS.split(",") if b.strip()]
     def __post_init__(self) -> None:
         project_root = Path(__file__).resolve().parents[2]
         if not self.MODEL_DIR:

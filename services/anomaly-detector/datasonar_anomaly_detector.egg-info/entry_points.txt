@@ -1,0 +1,2 @@
+[console_scripts]
+anomaly-detector = app.main:main
